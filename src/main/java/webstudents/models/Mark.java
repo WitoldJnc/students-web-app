@@ -1,4 +1,4 @@
-//package webStudents.models;
+//package webstudents.models;
 //
 //import lombok.Getter;
 //import lombok.NoArgsConstructor;

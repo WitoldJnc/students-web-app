@@ -2,21 +2,53 @@
 
 <body>
 <div>
-    <form method="post">
-        <input type="text" name="fname" placeholder="first name">
-        <input type="text" name="lname" placeholder="last name">
-        <button type="submit" >add student</button>
+    <form method="post" name="/add">
+    <input type="text" name="fname" placeholder="first name">
+    <input type="text" name="lname" placeholder="last name">
+    <!--<input type="text" name="groupNumber" placeholder="group number">-->
+    <button type="submit" >add student</button>
     </form>
 </div>
-<div>Список </div>
+<div>
+    <form method="post" action="filter">
+        <input type="text" name="filter" placeholder="find by first name">
+        <button type="submit">find</button>
+    </form>
 
-{{#students}}
     <div>
-        {{id}}
-        {{firstName}}
-        {{lastName}}
-
+        <form method="post" action="filterLastName">
+            <input type="text" name="filterLastName" placeholder="find by last name">
+            <button type="submit">find</button>
+        </form>
     </div>
-{{/students}}
+</div>
+
+<div>Список</div>
+
+
+<div>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>fname</th>
+            <th>lname</th>
+            <th>group Number</th>
+            <th>delete</th>
+            <th>edit</th>
+        </tr>
+        {{#students}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{firstName}}</td>
+                <td>{{lastName}}</td>
+                <td>{{group}}</td>
+                <td><a href="/delete/{{id}}">delete</a></td>
+                <td><a href="/edit/{{id}}">edit</a></td>
+            </tr>
+        {{/students}}
+    </table>
+
+</div>
+
 </body>
 </html>
