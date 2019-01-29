@@ -1,0 +1,33 @@
+<html>
+<body>
+
+
+<div>Список оценок</div>
+<div>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>discplineId</th>
+            <th>studentId</th>
+            <th>mark</th>
+            <th>delete</th>
+            <th>edit</th>
+        </tr>
+        {{#marks}}
+
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{discplineId}}</td>
+                        <td>{{studentId}}</td>
+                        <td>{{mark}}</td>
+                        <td><a href="/delete/{{id}}">delete</a></td>
+                        <td><a href="/edit/{{id}}">edit</a></td>
+                    </tr>
+
+        {{/marks}}
+    </table>
+
+</div>
+
+</body>
+</html>

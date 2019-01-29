@@ -1,0 +1,40 @@
+<html>
+<body>
+<div>
+    <form method="post" action="/addGroup">
+            <input type="text" name="groupNumber" placeholder="group number">
+            <button type="submit">add group</button>
+    </form>
+</div>
+
+<div>
+    <form method="post" action="/editGroup">
+        {{#anygroup}}
+        <input type="text" name="groupNuber" placeholder="to edit">
+
+        <button type="submit">upd group</button>
+{{/anygroup}}
+    </form>
+</div>
+<div>Список групп</div>
+<div>
+    <table>
+        <tr>
+            <th>id группы</th>
+            <th>номер группы</th>
+            <th>delete</th>
+            <th>edit</th>
+        </tr>
+        {{#groups}}
+            <tr>
+                <td><a href="/members/{{id}}">{{id}}</a></td>
+                <td>{{groupNumber}}</td>
+                <td><a href="/deleteGroup/{{id}}">delete</a></td>
+                <td><a href="/editGroup/{{id}}">edit</a></td>
+            </tr>
+        {{/groups}}
+    </table>
+
+</div>
+</body>
+</html>

@@ -3,10 +3,24 @@
 <body>
 <div>
     <form method="post" name="/add">
-    <input type="text" name="fname" placeholder="first name">
-    <input type="text" name="lname" placeholder="last name">
-    <!--<input type="text" name="groupNumber" placeholder="group number">-->
-    <button type="submit" >add student</button>
+        {{#student}}
+            <input type="text" name="fname" placeholder="first name" value="{{firstName}}">
+            <input type="text" name="lname" placeholder="last name" value="{{lastName}}">
+            <input type="hidden" name="studentId" value="{{id}}">
+            <!--<input type="text" name="groupNumber" placeholder="group number">-->
+            <select name="group">
+                {{#groups}}
+                    <option value="{{id}}">{{groupNumber}}</option>
+                {{/groups}}
+            </select>
+        {{/student}}
+        {{#student}}
+            <button type="submit">update student</button>
+        {{/student}}
+        {{^student}}
+            <button type="submit">add student</button>
+        {{/student}}
+
     </form>
 </div>
 <div>

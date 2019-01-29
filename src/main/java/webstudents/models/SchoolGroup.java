@@ -30,11 +30,11 @@ public class SchoolGroup {
             fetch = FetchType.EAGER)
     private List<Student> students;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinTable(name = "group_discipline",
-//    joinColumns = {@JoinColumn(name = "group_id")},
-//    inverseJoinColumns = {@JoinColumn(name = "discipline_Id")})
-//    private Set<Discipline> disciplines;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "group_discipline",
+    joinColumns = {@JoinColumn(name = "group_id")},
+    inverseJoinColumns = {@JoinColumn(name = "discipline_Id")})
+    private Set<Discipline> disciplines;
 
 
     public Integer getGroupNumber() {
@@ -51,4 +51,6 @@ public class SchoolGroup {
     public SchoolGroup(Integer groupNumber) {
         this.groupNumber = groupNumber;
     }
+
+
 }

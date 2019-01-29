@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import webstudents.models.SchoolGroup;
 import webstudents.models.Student;
+import webstudents.repo.SchoolGroupRepo;
 import webstudents.repo.StudentRepo;
 
 import java.util.List;
@@ -21,19 +23,29 @@ public class StudentController {
     @Autowired
     private StudentRepo studentRepo;
 
+    @Autowired
+    private SchoolGroupRepo schoolGroupRepo;
+
     @GetMapping("/students")
     public String index(Model model) {
         model.addAttribute("students", studentRepo.findAll());
+        model.addAttribute("groups", schoolGroupRepo.findAll());
+
         return "students";
     }
 
-    @PostMapping
-    public String add(@RequestParam String fname,
-                      @RequestParam String lname,
+    @PostMapping("/studentAdd")
+    public String add(@RequestParam(required = false) String fname,
+                      @RequestParam(required = false) String lname,
+                      @RequestParam(required =false, value = "group") SchoolGroup schoolGroup,
                       Model model) {
-        studentRepo.save(new Student(fname, lname));
-        model.addAttribute("students", studentRepo.findAll());
-        return "students";
+
+        Student student = new Student(fname, lname);
+        student.setGroup(schoolGroup);
+
+        model.addAttribute("students", studentRepo.save(student));
+
+        return "redirect:/students";
     }
 
     @RequestMapping("/delete/{id}")
@@ -45,19 +57,32 @@ public class StudentController {
     }
 
     @RequestMapping("/edit/{id}")
-    public String edit(@PathVariable("id") int id, Model model){
-        model.addAttribute("students", studentRepo.findById(id));
+    public String edit(@PathVariable("id") int id,
+                       @RequestParam String fname,
+                       @RequestParam String lname,
+                       @RequestParam(value = "group") SchoolGroup schoolGroup,
+                       @RequestParam(value = "studentId", required = false) Student student,
+                       Model model) {
+        model.addAttribute("groups", schoolGroupRepo.findAll());
+        model.addAttribute("student", studentRepo.getOne(id));
         model.addAttribute("students", studentRepo.findAll());
+        if (student != null) {
+            student.setFirstName(fname);
+            student.setLastName(lname);
+            student.setGroup(schoolGroup);
+            studentRepo.save(student);
+            return "redirect:/students";
+        }
         return "students";
     }
 
     @RequestMapping("/filter")
     public String filter(@RequestParam String filter,
-                                    Model model){
+                         Model model) {
         List<Student> byFirstName;
 
-        if(filter != null && !filter.isEmpty()){
-             byFirstName = studentRepo.findByFirstName(filter);
+        if (filter != null && !filter.isEmpty()) {
+            byFirstName = studentRepo.findByFirstName(filter);
         } else {
             byFirstName = studentRepo.findAll();
             return "redirect:/students";
@@ -68,10 +93,10 @@ public class StudentController {
 
     @RequestMapping("/filterLastName")
     public String filterLastName(@RequestParam String filterLastName,
-                         Model model){
+                                 Model model) {
         List<Student> lastName;
 
-        if(filterLastName != null && !filterLastName.isEmpty()){
+        if (filterLastName != null && !filterLastName.isEmpty()) {
             lastName = studentRepo.findByLastName(filterLastName);
         } else {
             lastName = studentRepo.findAll();
@@ -81,4 +106,5 @@ public class StudentController {
         return "students";
     }
 }
+
 
