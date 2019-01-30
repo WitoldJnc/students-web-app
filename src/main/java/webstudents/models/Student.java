@@ -22,7 +22,7 @@ public class Student {
     private String firstName;
     private String lastName;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
     private SchoolGroup group;
 
@@ -46,12 +46,5 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getGroup(){
-        return group != null ? String.valueOf(group.getGroupNumber()) : "<none>";
-    }
 
-
-    public void setGroup(SchoolGroup group) {
-        this.group = group;
-    }
 }

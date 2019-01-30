@@ -1,6 +1,9 @@
 <html>
 <body>
-
+<a href="/">главная | </a>
+<a href="/students"> студенты | </a>
+<a href="/disciplines"> дисциплины | </a>
+<a href="/groups"> группы | </a>
 
 <div>Список оценок</div>
 <div>
@@ -15,14 +18,14 @@
         </tr>
         {{#marks}}
 
-                    <tr>
-                        <td>{{id}}</td>
-                        <td>{{discplineId}}</td>
-                        <td>{{studentId}}</td>
-                        <td>{{mark}}</td>
-                        <td><a href="/delete/{{id}}">delete</a></td>
-                        <td><a href="/edit/{{id}}">edit</a></td>
-                    </tr>
+            <tr>
+                <td>{{id}}</td>
+                <td>{{discplineId}}</td>
+                <td>{{studentId}}</td>
+                <td>{{mark}}</td>
+                <td><a href="/delete/{{id}}">delete</a></td>
+                <td><a href="/edit/{{id}}">edit</a></td>
+            </tr>
 
         {{/marks}}
     </table>

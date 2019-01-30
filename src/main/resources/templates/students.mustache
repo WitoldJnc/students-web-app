@@ -1,28 +1,43 @@
 <html>
-
 <body>
 <div>
-    <form method="post" name="/add">
-        {{#student}}
-            <input type="text" name="fname" placeholder="first name" value="{{firstName}}">
-            <input type="text" name="lname" placeholder="last name" value="{{lastName}}">
-            <input type="hidden" name="studentId" value="{{id}}">
-            <!--<input type="text" name="groupNumber" placeholder="group number">-->
+    <a href="/">главная | </a>
+    <a href="/groups"> группы | </a>
+    <a href="/disciplines"> дисциплины | </a>
+    <a href="/marks"> оценки | </a>
+</div>
+<div>
+    <form method="post" name="studentAdd">
+        <input type="text" name="firstName" placeholder="first name" value="{{#firstName}}{{firstName}}{{/firstName}}">
+        <input type="text" name="lastName" placeholder="last name" value="{{#lastName}}{{lastName}}{{/lastName}}">
+        <input type="hidden" name="studentId" value="{{#id}}{{id}}{{/id}}">
+        <select name="group">
+            {{#groups}}
+                <option value="{{id}}">{{groupNumber}}</option>
+            {{/groups}}
+        </select>
+        <button type="submit">add student</button>
+    </form>
+</div>
+
+<div>
+    {{#student}}
+        <form method="post" action="/editStudent/{{#id}}{{id}}{{/id}}">
+            <input type="text" name="firstName" placeholder="first name"
+                   value="{{#firstName}}{{firstName}}{{/firstName}}">
+            <input type="text" name="lastName" placeholder="last name" value="{{#lastName}}{{lastName}}{{/lastName}}">
+            <input type="hidden" name="studentId" value="{{#id}}{{id}}{{/id}}">
             <select name="group">
                 {{#groups}}
                     <option value="{{id}}">{{groupNumber}}</option>
                 {{/groups}}
             </select>
-        {{/student}}
-        {{#student}}
-            <button type="submit">update student</button>
-        {{/student}}
-        {{^student}}
             <button type="submit">add student</button>
-        {{/student}}
-
-    </form>
+        </form>
+    {{/student}}
 </div>
+
+
 <div>
     <form method="post" action="filter">
         <input type="text" name="filter" placeholder="find by first name">
@@ -53,11 +68,11 @@
         {{#students}}
             <tr>
                 <td>{{id}}</td>
-                <td>{{firstName}}</td>
-                <td>{{lastName}}</td>
-                <td>{{group}}</td>
+                <td>{{#firstName}}{{.}}{{/firstName}}</td>
+                <td>{{#lastName}}{{.}}{{/lastName}}</td>
+                <td>{{#group.groupNumber}}{{.}}{{/group.groupNumber}}</td>
                 <td><a href="/delete/{{id}}">delete</a></td>
-                <td><a href="/edit/{{id}}">edit</a></td>
+                <td><a href="/editStudent/{{id}}">edit</a></td>
             </tr>
         {{/students}}
     </table>

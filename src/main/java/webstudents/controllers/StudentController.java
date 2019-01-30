@@ -34,16 +34,16 @@ public class StudentController {
         return "students";
     }
 
-    @PostMapping("/studentAdd")
-    public String add(@RequestParam(required = false) String fname,
-                      @RequestParam(required = false) String lname,
-                      @RequestParam(required =false, value = "group") SchoolGroup schoolGroup,
+    @PostMapping
+    public String add(@RequestParam(value = "firstName", required = false) String firstName,
+                      @RequestParam(value = "lastName",required = false) String lastName,
+                      @RequestParam(value = "group", required =false) SchoolGroup schoolGroup,
                       Model model) {
 
-        Student student = new Student(fname, lname);
+        Student student = new Student(firstName, lastName);
         student.setGroup(schoolGroup);
+        studentRepo.save(student);
 
-        model.addAttribute("students", studentRepo.save(student));
 
         return "redirect:/students";
     }
@@ -56,19 +56,19 @@ public class StudentController {
         return "redirect:/students";
     }
 
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/editStudent/{id}")
     public String edit(@PathVariable("id") int id,
-                       @RequestParam String fname,
-                       @RequestParam String lname,
-                       @RequestParam(value = "group") SchoolGroup schoolGroup,
+                       @RequestParam(value = "firstName", required = false) String firstName,
+                       @RequestParam(value = "lastName",required = false) String lastName,
+                       @RequestParam(value = "group", required =false) SchoolGroup schoolGroup,
                        @RequestParam(value = "studentId", required = false) Student student,
                        Model model) {
         model.addAttribute("groups", schoolGroupRepo.findAll());
         model.addAttribute("student", studentRepo.getOne(id));
         model.addAttribute("students", studentRepo.findAll());
         if (student != null) {
-            student.setFirstName(fname);
-            student.setLastName(lname);
+            student.setFirstName(firstName);
+            student.setLastName(lastName);
             student.setGroup(schoolGroup);
             studentRepo.save(student);
             return "redirect:/students";
@@ -84,7 +84,6 @@ public class StudentController {
         if (filter != null && !filter.isEmpty()) {
             byFirstName = studentRepo.findByFirstName(filter);
         } else {
-            byFirstName = studentRepo.findAll();
             return "redirect:/students";
         }
         model.addAttribute("students", byFirstName);
@@ -99,7 +98,6 @@ public class StudentController {
         if (filterLastName != null && !filterLastName.isEmpty()) {
             lastName = studentRepo.findByLastName(filterLastName);
         } else {
-            lastName = studentRepo.findAll();
             return "redirect:/students";
         }
         model.addAttribute("students", lastName);

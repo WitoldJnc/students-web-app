@@ -36,15 +36,6 @@ public class SchoolGroup {
     inverseJoinColumns = {@JoinColumn(name = "discipline_Id")})
     private Set<Discipline> disciplines;
 
-
-    public Integer getGroupNumber() {
-        return groupNumber;
-    }
-
-    public void setGroupNumber(Integer groupNumber) {
-        this.groupNumber = groupNumber;
-    }
-
     public SchoolGroup() {
     }
 

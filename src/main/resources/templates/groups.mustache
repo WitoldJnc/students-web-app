@@ -1,20 +1,25 @@
 <html>
 <body>
+<a href="/">главная | </a>
+<a href="/students"> студенты | </a>
+<a href="/disciplines"> дисциплины | </a>
+<a href="/marks"> оценки | </a>
 <div>
     <form method="post" action="/addGroup">
-            <input type="text" name="groupNumber" placeholder="group number">
-            <button type="submit">add group</button>
+        <input type="text" name="groupNumber" placeholder="group number">
+        <button type="submit">add group</button>
     </form>
 </div>
 
 <div>
-    <form method="post" action="/editGroup">
-        {{#anygroup}}
-        <input type="text" name="groupNuber" placeholder="to edit">
-
-        <button type="submit">upd group</button>
-{{/anygroup}}
-    </form>
+    {{#anygroup}}
+        <form method="post" action="/editGroup/{{#id}}{{id}}{{/id}}">
+            <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
+            <input type="text" name="groupNumber" placeholder="to edit"
+                   value="{{#groupNumber}}{{groupNumber}}{{/groupNumber}}">
+            <button type="submit">upd group</button>
+        </form>
+    {{/anygroup}}
 </div>
 <div>Список групп</div>
 <div>
