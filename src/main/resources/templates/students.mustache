@@ -7,7 +7,7 @@
     <a href="/marks"> оценки | </a>
 </div>
 <div>
-    <form method="post" name="studentAdd">
+    <form method="post" action="studentAdd">
         <input type="text" name="firstName" placeholder="first name" value="{{#firstName}}{{firstName}}{{/firstName}}">
         <input type="text" name="lastName" placeholder="last name" value="{{#lastName}}{{lastName}}{{/lastName}}">
         <input type="hidden" name="studentId" value="{{#id}}{{id}}{{/id}}">
@@ -32,7 +32,7 @@
                     <option value="{{id}}">{{groupNumber}}</option>
                 {{/groups}}
             </select>
-            <button type="submit">add student</button>
+            <button type="submit">upd student</button>
         </form>
     {{/student}}
 </div>

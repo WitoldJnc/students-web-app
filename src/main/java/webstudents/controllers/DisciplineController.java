@@ -15,16 +15,16 @@ public class DisciplineController {
     private DisciplineRepo disciplineRepo;
 
     @GetMapping("/disciplines")
-    public String showAllDisc(Model model){
+    public String showAllDisc(Model model) {
         model.addAttribute("disciplines", disciplineRepo.findAll());
         return "disciplines";
     }
 
     @PostMapping("/addDiscipline")
     public String addDiscipline(@RequestParam String disciplineName,
-                           Model model) {
+                                Model model) {
 
-        if(disciplineName != null){
+        if (disciplineName != null) {
             model.addAttribute("disciplines",
                     disciplineRepo.save(new Discipline(disciplineName)));
         }
@@ -32,9 +32,23 @@ public class DisciplineController {
     }
 
     @RequestMapping("/deleteDiscipline/{id}")
-    public String deleteGroup(@PathVariable("id") int id) {
+    public String deleDicipline(@PathVariable("id") int id) {
         disciplineRepo.deleteById(id);
         return "redirect:/disciplines";
+    }
+
+    @RequestMapping("editDiscipline/{id}")
+    public String editDiscipline(@PathVariable("id") int id,
+                                 @RequestParam(required = false) String disciplineName,
+                                 @RequestParam(value = "id", required = false) Discipline discipline,
+                                 Model model) {
+        model.addAttribute("anydiscipline", disciplineRepo.getOne(id));
+        model.addAttribute("disciplines", disciplineRepo.findAll());
+        if (discipline != null) {
+            discipline.setDisciplineName(disciplineName);
+            disciplineRepo.save(discipline);
+        }
+        return "disciplines";
     }
 
 }

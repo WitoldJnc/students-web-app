@@ -5,19 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import webstudents.models.SchoolGroup;
 import webstudents.models.Student;
 import webstudents.repo.SchoolGroupRepo;
 import webstudents.repo.StudentRepo;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 
 @Controller
-
 public class StudentController {
 
     @Autowired
@@ -34,10 +30,10 @@ public class StudentController {
         return "students";
     }
 
-    @PostMapping
+    @PostMapping("/studentAdd")
     public String add(@RequestParam(value = "firstName", required = false) String firstName,
-                      @RequestParam(value = "lastName",required = false) String lastName,
-                      @RequestParam(value = "group", required =false) SchoolGroup schoolGroup,
+                      @RequestParam(value = "lastName", required = false) String lastName,
+                      @RequestParam(value = "group", required = false) SchoolGroup schoolGroup,
                       Model model) {
 
         Student student = new Student(firstName, lastName);
@@ -59,8 +55,8 @@ public class StudentController {
     @RequestMapping("/editStudent/{id}")
     public String edit(@PathVariable("id") int id,
                        @RequestParam(value = "firstName", required = false) String firstName,
-                       @RequestParam(value = "lastName",required = false) String lastName,
-                       @RequestParam(value = "group", required =false) SchoolGroup schoolGroup,
+                       @RequestParam(value = "lastName", required = false) String lastName,
+                       @RequestParam(value = "group", required = false) SchoolGroup schoolGroup,
                        @RequestParam(value = "studentId", required = false) Student student,
                        Model model) {
         model.addAttribute("groups", schoolGroupRepo.findAll());

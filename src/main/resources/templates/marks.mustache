@@ -1,30 +1,61 @@
 <html>
 <body>
-<a href="/">главная | </a>
-<a href="/students"> студенты | </a>
-<a href="/disciplines"> дисциплины | </a>
-<a href="/groups"> группы | </a>
+<div>
+    <a href="/">главная | </a>
+    <a href="/students"> студенты | </a>
+    <a href="/disciplines"> дисциплины | </a>
+    <a href="/groups"> группы | </a>
+</div>
+<div>
+    <form method="post" action="/addMarks">
+        <input type="text" name="students" placeholder="student id"
+               value="{{#studentId.id}}{{studentId.id}}{{/studentId.id}}">
+        <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
+        <select name="disciplines">
+            {{#disciplines}}
+                <option value="{{id}}">{{disciplineName}}</option>
+            {{/disciplines}}
+        </select>
+        <input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">
+        <button type="submit">add student</button>
+    </form>
+</div>
+<div>
+    {{#mark}}
+        <form method="post" action="/editMark/{{#id}}{{id}}{{/id}}">
+            <input name="markId" value="{{#id}}{{id}}{{/id}}" hidden>
+            <input type="text" name="students" placeholder="student id"
+                   value="{{#studentId.id}}{{studentId.id}}{{/studentId.id}}">
 
-<div>Список оценок</div>
+            <select name="disciplines">
+                {{#disciplines}}
+                    <option value="{{id}}">{{disciplineName}}</option>
+                {{/disciplines}}
+            </select>
+            <input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">
+            <button type="submit">upd student</button>
+        </form>
+    {{/mark}}
+</div>
+<div>табель оценок</div>
 <div>
     <table>
         <tr>
-            <th>id</th>
-            <th>discplineId</th>
-            <th>studentId</th>
+            <th>mark id</th>
+            <th>student id</th>
+            <th>discipline</th>
             <th>mark</th>
             <th>delete</th>
             <th>edit</th>
         </tr>
         {{#marks}}
-
             <tr>
                 <td>{{id}}</td>
-                <td>{{discplineId}}</td>
-                <td>{{studentId}}</td>
-                <td>{{mark}}</td>
-                <td><a href="/delete/{{id}}">delete</a></td>
-                <td><a href="/edit/{{id}}">edit</a></td>
+                <td>{{#studentId.id}}{{.}}{{/studentId.id}}</td>
+                <td>{{#diciplineId.disciplineName}}{{.}}{{/diciplineId.disciplineName}}</td>
+                <td>{{#mark}}{{.}}{{/mark}}</td>
+                <td><a href="/deleteMark/{{id}}">delete</a></td>
+                <td><a href="/editMark/{{id}}">edit</a></td>
             </tr>
 
         {{/marks}}
@@ -34,3 +65,4 @@
 
 </body>
 </html>
+

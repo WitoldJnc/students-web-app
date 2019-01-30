@@ -8,7 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Entity
-@ToString
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -34,12 +34,12 @@ public class Mark {
         this.mark = mark;
     }
 
-    public Integer getDiciplineId() {
-        return diciplineId.getId();
+    public Mark(Student studentId, Integer mark) {
+        this.studentId = studentId;
+        this.mark = mark;
     }
 
-
-    public Integer getStudentId() {
-        return studentId.getId();
+    public Mark(Integer mark) {
+        this.mark = mark;
     }
 }

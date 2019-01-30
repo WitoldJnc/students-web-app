@@ -10,7 +10,16 @@
         <button type="submit">add discipline</button>
     </form>
 </div>
-
+<div>
+    {{#anydiscipline}}
+        <form method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}">
+            <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
+            <input type="text" name="disciplineName" placeholder="to edit"
+                   value="{{#disciplineName}}{{disciplineName}}{{/disciplineName}}">
+            <button type="submit">upd group</button>
+        </form>
+    {{/anydiscipline}}
+</div>
 
 <div>Список дисциплин</div>
 <div>
@@ -24,9 +33,9 @@
         {{#disciplines}}
             <tr>
                 <td>{{id}}</td>
-                <td>{{disciplineName}}</td>
+                <td>{{#disciplineName}}{{.}}{{/disciplineName}}</td>
                 <td><a href="/deleteDiscipline/{{id}}">delete</a></td>
-                <td><a href="/edit/{{id}}">edit</a></td>
+                <td><a href="/editDiscipline/{{id}}">edit</a></td>
             </tr>
         {{/disciplines}}
     </table>

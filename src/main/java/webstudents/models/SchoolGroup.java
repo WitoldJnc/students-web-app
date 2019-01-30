@@ -23,10 +23,10 @@ public class SchoolGroup {
 
     private Integer groupNumber;
 
-    @ElementCollection(targetClass = Student.class, fetch = FetchType.EAGER)
+
     @JsonIgnore
     @OneToMany(targetEntity=Student.class,
-            mappedBy="group",cascade=CascadeType.ALL,
+            mappedBy="group",cascade=CascadeType.REFRESH,
             fetch = FetchType.EAGER)
     private List<Student> students;
 
