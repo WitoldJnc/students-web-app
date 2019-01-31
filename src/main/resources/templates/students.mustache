@@ -1,43 +1,20 @@
 <html>
 <body>
-<div>
-    <a href="/">главная | </a>
-    <a href="/groups"> группы | </a>
-    <a href="/disciplines"> дисциплины | </a>
-    <a href="/marks"> оценки | </a>
-</div>
+{{> index}}
 <div>
     <form method="post" action="studentAdd">
-        <input type="text" name="firstName" placeholder="first name" value="{{#firstName}}{{firstName}}{{/firstName}}">
-        <input type="text" name="lastName" placeholder="last name" value="{{#lastName}}{{lastName}}{{/lastName}}">
-        <input type="hidden" name="studentId" value="{{#id}}{{id}}{{/id}}">
-        <select name="group">
-            {{#groups}}
-                <option value="{{id}}">{{groupNumber}}</option>
-            {{/groups}}
-        </select>
+        {{> addStudentForm}}
         <button type="submit">add student</button>
     </form>
 </div>
-
 <div>
     {{#student}}
-        <form method="post" action="/editStudent/{{#id}}{{id}}{{/id}}">
-            <input type="text" name="firstName" placeholder="first name"
-                   value="{{#firstName}}{{firstName}}{{/firstName}}">
-            <input type="text" name="lastName" placeholder="last name" value="{{#lastName}}{{lastName}}{{/lastName}}">
-            <input type="hidden" name="studentId" value="{{#id}}{{id}}{{/id}}">
-            <select name="group">
-                {{#groups}}
-                    <option value="{{id}}">{{groupNumber}}</option>
-                {{/groups}}
-            </select>
+        <form method="post" action="/editStudent/{{#id}}{{id}}{{/id}}/path">
+            {{> addStudentForm}}
             <button type="submit">upd student</button>
         </form>
     {{/student}}
 </div>
-
-
 <div>
     <form method="post" action="filter">
         <input type="text" name="filter" placeholder="find by first name">

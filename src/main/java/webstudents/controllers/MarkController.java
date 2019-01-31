@@ -54,22 +54,25 @@ public class MarkController {
     }
 
     @RequestMapping("/editMark/{id}")
-    public String editMark(@PathVariable("id") int id,
-                           @RequestParam(value = "students", required = false) Student student,
-                           @RequestParam(value = "disciplines", required = false) Discipline discipline,
-                           @RequestParam(value = "mark", required = false) Integer mark,
-                           @RequestParam(value = "markId", required = false) Mark markmodel, Model model) {
+    public String editMarkRendeer(@PathVariable("id") Mark mark, Model model) {
         model.addAttribute("disciplines", disciplineRepo.findAll());
-        model.addAttribute("mark", markRepo.getOne(id));
+        model.addAttribute("mark", mark);
         model.addAttribute("marks", markRepo.findAll());
-        if (markmodel != null) {
-            markmodel.setStudentId(student);
-            markmodel.setDiciplineId(discipline);
-            markmodel.setMark(mark);
-            markRepo.save(markmodel);
-            return "redirect:/marks";
-        }
+
         return "marks";
     }
 
+    @RequestMapping("/editMark/{id}/path")
+    public String editMark(@PathVariable("id") Mark markmodel,
+                           @RequestParam(value = "students") Student student,
+                           @RequestParam(value = "disciplines") Discipline discipline,
+                           @RequestParam(value = "mark") Integer mark, Model model) {
+
+        markmodel.setStudentId(student);
+        markmodel.setDiciplineId(discipline);
+        markmodel.setMark(mark);
+        markRepo.save(markmodel);
+
+        return String.format("redirect:/editMark/%s", markmodel.getId());
+    }
 }

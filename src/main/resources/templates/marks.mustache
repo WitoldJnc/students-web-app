@@ -1,38 +1,16 @@
 <html>
 <body>
-<div>
-    <a href="/">главная | </a>
-    <a href="/students"> студенты | </a>
-    <a href="/disciplines"> дисциплины | </a>
-    <a href="/groups"> группы | </a>
-</div>
+{{> index}}
 <div>
     <form method="post" action="/addMarks">
-        <input type="text" name="students" placeholder="student id"
-               value="{{#studentId.id}}{{studentId.id}}{{/studentId.id}}">
-        <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
-        <select name="disciplines">
-            {{#disciplines}}
-                <option value="{{id}}">{{disciplineName}}</option>
-            {{/disciplines}}
-        </select>
-        <input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">
+        {{> addMarkForm}}
         <button type="submit">add student</button>
     </form>
 </div>
 <div>
     {{#mark}}
-        <form method="post" action="/editMark/{{#id}}{{id}}{{/id}}">
-            <input name="markId" value="{{#id}}{{id}}{{/id}}" hidden>
-            <input type="text" name="students" placeholder="student id"
-                   value="{{#studentId.id}}{{studentId.id}}{{/studentId.id}}">
-
-            <select name="disciplines">
-                {{#disciplines}}
-                    <option value="{{id}}">{{disciplineName}}</option>
-                {{/disciplines}}
-            </select>
-            <input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">
+        <form method="post" action="/editMark/{{#id}}{{id}}{{/id}}/path">
+            {{> addMarkForm}}
             <button type="submit">upd student</button>
         </form>
     {{/mark}}

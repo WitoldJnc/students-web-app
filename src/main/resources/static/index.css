@@ -1,0 +1,12 @@
+
+#hrefs a:link, a:visited {
+    color: blue;
+}
+
+#hrefs a:active{
+color:red;
+}
+
+#hrefs a:hover {
+    color: red;
+}

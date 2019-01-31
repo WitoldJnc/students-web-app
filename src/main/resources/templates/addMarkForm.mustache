@@ -1,0 +1,9 @@
+<input type="text" name="students" placeholder="student id"
+       value="{{#studentId.id}}{{studentId.id}}{{/studentId.id}}">
+<input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
+<select name="disciplines">
+    {{#disciplines}}
+        <option value="{{id}}">{{disciplineName}}</option>
+    {{/disciplines}}
+</select>
+<input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">

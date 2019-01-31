@@ -27,7 +27,7 @@ public class GroupController {
     public String seeAllInGroup(@PathVariable("id") int id,
                                 Model model) {
 
-        model.addAttribute("students", studentRepo.findAllInGroup(id));
+        model.addAttribute("students", studentRepo.findAllByGroupId(id));
         return "members";
     }
 
@@ -49,17 +49,18 @@ public class GroupController {
     }
 
     @RequestMapping("editGroup/{id}")
-    public String editGroup(@PathVariable("id") int id,
-                            @RequestParam(required = false) Integer groupNumber,
-                            @RequestParam(value = "id", required = false) SchoolGroup schoolGroup,
-                            Model model) {
-        model.addAttribute("anygroup", schoolGroupRepo.getOne(id));
+    public String editGroupRender(@PathVariable("id") SchoolGroup schoolGroup, Model model) {
+        model.addAttribute("anygroup", schoolGroup);
         model.addAttribute("groups", schoolGroupRepo.findAll());
-        if (schoolGroup != null) {
-            schoolGroup.setGroupNumber(groupNumber);
-            schoolGroupRepo.save(schoolGroup);
-        }
         return "groups";
+    }
+
+    @RequestMapping("editGroup/{id}/path")
+    public String editGroup(@PathVariable("id") SchoolGroup schoolGroup,
+                            @RequestParam Integer groupNumber) {
+        schoolGroup.setGroupNumber(groupNumber);
+        schoolGroupRepo.save(schoolGroup);
+        return String.format("redirect:/editGroup/%s", schoolGroup.getId());
     }
 }
 

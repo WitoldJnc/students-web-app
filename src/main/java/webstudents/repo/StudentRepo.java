@@ -2,7 +2,6 @@ package webstudents.repo;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import webstudents.models.Student;
 
@@ -15,8 +14,6 @@ public interface StudentRepo extends JpaRepository<Student, Integer> {
 
     List<Student> findByLastName(String lastName);
 
-    @Query(value = "select * from students where students.students.group_id = ?",
-            nativeQuery = true)
-    List<Student> findAllInGroup(Integer groupId);
+    List<Student> findAllByGroupId(Integer groupId);
 
 }

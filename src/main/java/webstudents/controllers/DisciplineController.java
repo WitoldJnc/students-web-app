@@ -38,17 +38,20 @@ public class DisciplineController {
     }
 
     @RequestMapping("editDiscipline/{id}")
-    public String editDiscipline(@PathVariable("id") int id,
-                                 @RequestParam(required = false) String disciplineName,
-                                 @RequestParam(value = "id", required = false) Discipline discipline,
-                                 Model model) {
-        model.addAttribute("anydiscipline", disciplineRepo.getOne(id));
+    public String editDisciplineRender(@PathVariable("id") Discipline discipline,
+                                       Model model) {
+        model.addAttribute("disciplineForEdit", discipline);
         model.addAttribute("disciplines", disciplineRepo.findAll());
-        if (discipline != null) {
-            discipline.setDisciplineName(disciplineName);
-            disciplineRepo.save(discipline);
-        }
+
         return "disciplines";
+    }
+
+    @RequestMapping("editDiscipline/{id}/path")
+    public String editDiscipline(@PathVariable("id") Discipline discipline,
+                                 @RequestParam String disciplineName) {
+        discipline.setDisciplineName(disciplineName);
+        disciplineRepo.save(discipline);
+        return String.format("redirect:/editDiscipline/%s", discipline.getId());
     }
 
 }

@@ -31,16 +31,14 @@ public class StudentController {
     }
 
     @PostMapping("/studentAdd")
-    public String add(@RequestParam(value = "firstName", required = false) String firstName,
-                      @RequestParam(value = "lastName", required = false) String lastName,
-                      @RequestParam(value = "group", required = false) SchoolGroup schoolGroup,
+    public String add(@RequestParam(value = "firstName") String firstName,
+                      @RequestParam(value = "lastName") String lastName,
+                      @RequestParam(value = "group") SchoolGroup schoolGroup,
                       Model model) {
 
         Student student = new Student(firstName, lastName);
         student.setGroup(schoolGroup);
         studentRepo.save(student);
-
-
         return "redirect:/students";
     }
 
@@ -53,23 +51,23 @@ public class StudentController {
     }
 
     @RequestMapping("/editStudent/{id}")
-    public String edit(@PathVariable("id") int id,
-                       @RequestParam(value = "firstName", required = false) String firstName,
-                       @RequestParam(value = "lastName", required = false) String lastName,
-                       @RequestParam(value = "group", required = false) SchoolGroup schoolGroup,
-                       @RequestParam(value = "studentId", required = false) Student student,
-                       Model model) {
+    public String editRender(@PathVariable("id") Student student, Model model) {
         model.addAttribute("groups", schoolGroupRepo.findAll());
-        model.addAttribute("student", studentRepo.getOne(id));
+        model.addAttribute("student", student);
         model.addAttribute("students", studentRepo.findAll());
-        if (student != null) {
-            student.setFirstName(firstName);
-            student.setLastName(lastName);
-            student.setGroup(schoolGroup);
-            studentRepo.save(student);
-            return "redirect:/students";
-        }
         return "students";
+    }
+
+    @RequestMapping("/editStudent/{id}/path")
+    public String edit(@PathVariable("id") Student student,
+                       @RequestParam(value = "firstName") String firstName,
+                       @RequestParam(value = "lastName") String lastName,
+                       @RequestParam(value = "group") SchoolGroup schoolGroup) {
+        student.setFirstName(firstName);
+        student.setLastName(lastName);
+        student.setGroup(schoolGroup);
+        studentRepo.save(student);
+        return String.format("redirect:/editStudent/%s", student.getId());
     }
 
     @RequestMapping("/filter")

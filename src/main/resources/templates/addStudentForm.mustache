@@ -1,0 +1,8 @@
+<input type="text" name="firstName" placeholder="first name" value="{{#firstName}}{{firstName}}{{/firstName}}">
+<input type="text" name="lastName" placeholder="last name" value="{{#lastName}}{{lastName}}{{/lastName}}">
+<input type="hidden" name="id" value="{{#id}}{{id}}{{/id}}">
+<select name="group">
+    {{#groups}}
+        <option value="{{id}}">{{groupNumber}}</option>
+    {{/groups}}
+</select>
