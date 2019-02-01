@@ -24,10 +24,10 @@ public class DisciplineController {
     public String addDiscipline(@RequestParam String disciplineName,
                                 Model model) {
 
-        if (disciplineName != null) {
+        if (!disciplineName.isEmpty())
             model.addAttribute("disciplines",
                     disciplineRepo.save(new Discipline(disciplineName)));
-        }
+
         return "redirect:/disciplines";
     }
 
@@ -46,11 +46,13 @@ public class DisciplineController {
         return "disciplines";
     }
 
-    @RequestMapping("editDiscipline/{id}/path")
+    @RequestMapping("editDiscipline/{id}/patch")
     public String editDiscipline(@PathVariable("id") Discipline discipline,
                                  @RequestParam String disciplineName) {
         discipline.setDisciplineName(disciplineName);
-        disciplineRepo.save(discipline);
+
+        if (!disciplineName.isEmpty())
+            disciplineRepo.save(discipline);
         return String.format("redirect:/editDiscipline/%s", discipline.getId());
     }
 

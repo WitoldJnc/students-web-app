@@ -12,7 +12,6 @@ import webstudents.repo.StudentRepo;
 
 import java.util.List;
 
-
 @Controller
 public class StudentController {
 
@@ -38,7 +37,9 @@ public class StudentController {
 
         Student student = new Student(firstName, lastName);
         student.setGroup(schoolGroup);
-        studentRepo.save(student);
+        if (!firstName.isEmpty() && !lastName.isEmpty())
+            studentRepo.save(student);
+
         return "redirect:/students";
     }
 
@@ -58,7 +59,7 @@ public class StudentController {
         return "students";
     }
 
-    @RequestMapping("/editStudent/{id}/path")
+    @RequestMapping("/editStudent/{id}/patch")
     public String edit(@PathVariable("id") Student student,
                        @RequestParam(value = "firstName") String firstName,
                        @RequestParam(value = "lastName") String lastName,
@@ -66,7 +67,9 @@ public class StudentController {
         student.setFirstName(firstName);
         student.setLastName(lastName);
         student.setGroup(schoolGroup);
-        studentRepo.save(student);
+
+        if (!firstName.isEmpty() && !lastName.isEmpty())
+            studentRepo.save(student);
         return String.format("redirect:/editStudent/%s", student.getId());
     }
 

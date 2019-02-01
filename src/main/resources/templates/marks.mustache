@@ -2,16 +2,16 @@
 <body>
 {{> index}}
 <div>
-    <form method="post" action="/addMarks">
-        {{> addMarkForm}}
-        <button type="submit">add student</button>
-    </form>
-</div>
-<div>
     {{#mark}}
-        <form method="post" action="/editMark/{{#id}}{{id}}{{/id}}/path">
+        <form method="post" action="/editMark/{{#id}}{{id}}{{/id}}/patch">
             {{> addMarkForm}}
-            <button type="submit">upd student</button>
+            <button type="submit">upd mark</button>
+        </form>
+    {{/mark}}
+    {{^mark}}
+        <form method="post" action="/addMarks">
+            {{> addMarkForm}}
+            <button type="submit">add mark</button>
         </form>
     {{/mark}}
 </div>
@@ -19,7 +19,6 @@
 <div>
     <table>
         <tr>
-            <th>mark id</th>
             <th>student id</th>
             <th>discipline</th>
             <th>mark</th>
@@ -28,7 +27,6 @@
         </tr>
         {{#marks}}
             <tr>
-                <td>{{id}}</td>
                 <td>{{#studentId.id}}{{.}}{{/studentId.id}}</td>
                 <td>{{#diciplineId.disciplineName}}{{.}}{{/diciplineId.disciplineName}}</td>
                 <td>{{#mark}}{{.}}{{/mark}}</td>

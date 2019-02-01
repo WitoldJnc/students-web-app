@@ -36,14 +36,15 @@ public class MarkController {
     }
 
     @PostMapping("/addMarks")
-    public String addMarks(@RequestParam(value = "students", required = false) Student student,
-                           @RequestParam(value = "disciplines", required = false) Discipline discipline,
-                           @RequestParam(value = "mark", required = false) Integer mark,
+    public String addMarks(@RequestParam(value = "students") Student student,
+                           @RequestParam(value = "disciplines") Discipline discipline,
+                           @RequestParam(value = "mark") Integer mark,
                            Model model) {
         Mark mark1 = new Mark(mark);
         mark1.setDiciplineId(discipline);
         mark1.setStudentId(student);
-        markRepo.save(mark1);
+        if (mark != null && student != null)
+            markRepo.save(mark1);
         return "redirect:/marks";
     }
 
@@ -62,7 +63,7 @@ public class MarkController {
         return "marks";
     }
 
-    @RequestMapping("/editMark/{id}/path")
+    @RequestMapping("/editMark/{id}/patch")
     public String editMark(@PathVariable("id") Mark markmodel,
                            @RequestParam(value = "students") Student student,
                            @RequestParam(value = "disciplines") Discipline discipline,
@@ -71,8 +72,8 @@ public class MarkController {
         markmodel.setStudentId(student);
         markmodel.setDiciplineId(discipline);
         markmodel.setMark(mark);
-        markRepo.save(markmodel);
-
+        if (mark != null && student != null)
+            markRepo.save(markmodel);
         return String.format("redirect:/editMark/%s", markmodel.getId());
     }
 }

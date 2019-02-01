@@ -14,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "disciplines")
 public class Discipline {
 
     @Id
@@ -35,4 +36,5 @@ public class Discipline {
     public Discipline(String disciplineName) {
         this.disciplineName = disciplineName;
     }
+    
 }

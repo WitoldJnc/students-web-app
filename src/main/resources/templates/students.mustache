@@ -2,16 +2,16 @@
 <body>
 {{> index}}
 <div>
-    <form method="post" action="studentAdd">
-        {{> addStudentForm}}
-        <button type="submit">add student</button>
-    </form>
-</div>
-<div>
     {{#student}}
-        <form method="post" action="/editStudent/{{#id}}{{id}}{{/id}}/path">
+        <form method="post" action="/editStudent/{{#id}}{{id}}{{/id}}/patch">
             {{> addStudentForm}}
             <button type="submit">upd student</button>
+        </form>
+    {{/student}}
+    {{^student}}
+        <form method="post" action="studentAdd">
+            {{> addStudentForm}}
+            <button type="submit">add student</button>
         </form>
     {{/student}}
 </div>

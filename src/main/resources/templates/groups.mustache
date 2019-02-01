@@ -2,16 +2,16 @@
 <body>
 {{> index}}
 <div>
-    <form method="post" action="/addGroup">
-        {{> addGroupForm}}
-        <button type="submit">add group</button>
-    </form>
-</div>
-<div>
     {{#anygroup}}
-        <form method="post" action="/editGroup/{{#id}}{{id}}{{/id}}/path">
+        <form method="post" action="/editGroup/{{#id}}{{id}}{{/id}}/patch">
             {{> addGroupForm}}
             <button type="submit">upd group</button>
+        </form>
+    {{/anygroup}}
+    {{^anygroup}}
+        <form method="post" action="/addGroup">
+            {{> addGroupForm}}
+            <button type="submit">add group</button>
         </form>
     {{/anygroup}}
 </div>
@@ -24,14 +24,14 @@
             <th>delete</th>
             <th>edit</th>
         </tr>
-        {{#groups}}
+        {{#each groups}}
             <tr>
                 <td><a href="/members/{{id}}">{{id}}</a></td>
                 <td>{{groupNumber}}</td>
                 <td><a href="/deleteGroup/{{id}}">delete</a></td>
                 <td><a href="/editGroup/{{id}}">edit</a></td>
             </tr>
-        {{/groups}}
+        {{/each}}
     </table>
 
 </div>

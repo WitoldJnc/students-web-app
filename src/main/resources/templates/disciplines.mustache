@@ -2,16 +2,16 @@
 <body>
 {{> index}}
 <div>
-    <form method="post" action="/addDiscipline">
-        {{> addDisciplineForm}}
-        <button type="submit">add discipline</button>
-    </form>
-</div>
-<div>
     {{#disciplineForEdit}}
-        <form method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}/path">
+        <form method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
             {{> addDisciplineForm}}
-            <button type="submit">upd group</button>
+            <button type="submit">upd discipline</button>
+        </form>
+    {{/disciplineForEdit}}
+    {{^disciplineForEdit}}
+        <form method="post" action="/addDiscipline">
+            {{> addDisciplineForm}}
+            <button type="submit">add discipline</button>
         </form>
     {{/disciplineForEdit}}
 </div>
