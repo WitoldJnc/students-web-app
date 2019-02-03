@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import webstudents.models.Discipline;
-import webstudents.models.SchoolGroup;
 import webstudents.repo.DisciplineRepo;
 
 @Controller
@@ -24,10 +23,10 @@ public class DisciplineController {
     public String addDiscipline(@RequestParam String disciplineName,
                                 Model model) {
 
-        if (!disciplineName.isEmpty())
+        if (!disciplineName.isEmpty()) {
             model.addAttribute("disciplines",
                     disciplineRepo.save(new Discipline(disciplineName)));
-
+        }
         return "redirect:/disciplines";
     }
 
@@ -51,8 +50,9 @@ public class DisciplineController {
                                  @RequestParam String disciplineName) {
         discipline.setDisciplineName(disciplineName);
 
-        if (!disciplineName.isEmpty())
+        if (!disciplineName.isEmpty()) {
             disciplineRepo.save(discipline);
+        }
         return String.format("redirect:/editDiscipline/%s", discipline.getId());
     }
 

@@ -3,6 +3,8 @@
 <input type="hidden" name="id" value="{{#id}}{{id}}{{/id}}">
 <select name="group">
     {{#groups}}
-        <option value="{{id}}">{{groupNumber}}</option>
+        <option {{#eq groupNumber group.groupNumber}}selected{{/eq}} value="{{id}}">
+            {{groupNumber}}
+        </option>
     {{/groups}}
 </select>

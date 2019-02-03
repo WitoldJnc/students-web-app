@@ -4,13 +4,13 @@
 <div>
     {{#mark}}
         <form method="post" action="/editMark/{{#id}}{{id}}{{/id}}/patch">
-            {{> addMarkForm}}
+            {{> partials/addMarkForm}}
             <button type="submit">upd mark</button>
         </form>
     {{/mark}}
     {{^mark}}
         <form method="post" action="/addMarks">
-            {{> addMarkForm}}
+            {{> partials/addMarkForm}}
             <button type="submit">add mark</button>
         </form>
     {{/mark}}
@@ -28,7 +28,7 @@
         {{#marks}}
             <tr>
                 <td>{{#studentId.id}}{{.}}{{/studentId.id}}</td>
-                <td>{{#diciplineId.disciplineName}}{{.}}{{/diciplineId.disciplineName}}</td>
+                <td>{{#disciplineId.disciplineName}}{{.}}{{/disciplineId.disciplineName}}</td>
                 <td>{{#mark}}{{.}}{{/mark}}</td>
                 <td><a href="/deleteMark/{{id}}">delete</a></td>
                 <td><a href="/editMark/{{id}}">edit</a></td>

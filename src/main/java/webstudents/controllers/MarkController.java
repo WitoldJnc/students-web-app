@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import webstudents.models.Discipline;
 import webstudents.models.Mark;
-import webstudents.models.SchoolGroup;
 import webstudents.models.Student;
 import webstudents.repo.DisciplineRepo;
 import webstudents.repo.MarkRepo;
@@ -38,13 +37,13 @@ public class MarkController {
     @PostMapping("/addMarks")
     public String addMarks(@RequestParam(value = "students") Student student,
                            @RequestParam(value = "disciplines") Discipline discipline,
-                           @RequestParam(value = "mark") Integer mark,
-                           Model model) {
+                           @RequestParam(value = "mark") Integer mark) {
         Mark mark1 = new Mark(mark);
-        mark1.setDiciplineId(discipline);
+        mark1.setDisciplineId(discipline);
         mark1.setStudentId(student);
-        if (mark != null && student != null)
+        if (mark != null && student != null) {
             markRepo.save(mark1);
+        }
         return "redirect:/marks";
     }
 
@@ -67,13 +66,14 @@ public class MarkController {
     public String editMark(@PathVariable("id") Mark markmodel,
                            @RequestParam(value = "students") Student student,
                            @RequestParam(value = "disciplines") Discipline discipline,
-                           @RequestParam(value = "mark") Integer mark, Model model) {
+                           @RequestParam(value = "mark") Integer mark) {
 
         markmodel.setStudentId(student);
-        markmodel.setDiciplineId(discipline);
+        markmodel.setDisciplineId(discipline);
         markmodel.setMark(mark);
-        if (mark != null && student != null)
+        if (mark != null && student != null) {
             markRepo.save(markmodel);
+        }
         return String.format("redirect:/editMark/%s", markmodel.getId());
     }
 }

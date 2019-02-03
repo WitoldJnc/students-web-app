@@ -28,7 +28,7 @@ public class Discipline {
 
     @JsonIgnore
     @OneToMany(targetEntity = Mark.class,
-            mappedBy = "diciplineId", cascade = CascadeType.ALL,
+            mappedBy = "disciplineId", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private Set<Mark> markSet;
 

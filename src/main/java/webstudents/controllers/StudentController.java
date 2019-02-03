@@ -32,14 +32,12 @@ public class StudentController {
     @PostMapping("/studentAdd")
     public String add(@RequestParam(value = "firstName") String firstName,
                       @RequestParam(value = "lastName") String lastName,
-                      @RequestParam(value = "group") SchoolGroup schoolGroup,
-                      Model model) {
-
+                      @RequestParam(value = "group") SchoolGroup schoolGroup) {
         Student student = new Student(firstName, lastName);
         student.setGroup(schoolGroup);
-        if (!firstName.isEmpty() && !lastName.isEmpty())
+        if (!firstName.isEmpty() && !lastName.isEmpty()) {
             studentRepo.save(student);
-
+        }
         return "redirect:/students";
     }
 
@@ -68,8 +66,9 @@ public class StudentController {
         student.setLastName(lastName);
         student.setGroup(schoolGroup);
 
-        if (!firstName.isEmpty() && !lastName.isEmpty())
+        if (!firstName.isEmpty() && !lastName.isEmpty()) {
             studentRepo.save(student);
+        }
         return String.format("redirect:/editStudent/%s", student.getId());
     }
 

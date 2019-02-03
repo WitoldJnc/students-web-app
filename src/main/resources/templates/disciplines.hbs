@@ -4,13 +4,15 @@
 <div>
     {{#disciplineForEdit}}
         <form method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
-            {{> addDisciplineForm}}
+            {{> partials/addDisciplineForm}}
+
             <button type="submit">upd discipline</button>
         </form>
     {{/disciplineForEdit}}
     {{^disciplineForEdit}}
         <form method="post" action="/addDiscipline">
-            {{> addDisciplineForm}}
+            {{> partials/addDisciplineForm}}
+
             <button type="submit">add discipline</button>
         </form>
     {{/disciplineForEdit}}

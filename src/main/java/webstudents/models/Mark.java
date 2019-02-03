@@ -3,7 +3,6 @@ package webstudents.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -21,7 +20,7 @@ public class Mark {
 
     @ManyToOne
     @JoinColumn(name = "discipline_id")
-    private Discipline diciplineId;
+    private Discipline disciplineId;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
@@ -29,7 +28,7 @@ public class Mark {
     private Integer mark;
 
     public Mark(Discipline diciplineId, Student studentId, Integer mark) {
-        this.diciplineId = diciplineId;
+        this.disciplineId = diciplineId;
         this.studentId = studentId;
         this.mark = mark;
     }

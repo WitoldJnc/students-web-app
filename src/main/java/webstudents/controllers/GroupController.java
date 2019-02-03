@@ -35,10 +35,10 @@ public class GroupController {
     public String addGroup(@RequestParam Integer groupNumber,
                            Model model) {
 
-        if (groupNumber != null)
+        if (groupNumber != null) {
             model.addAttribute("groups",
                     schoolGroupRepo.save(new SchoolGroup(groupNumber)));
-
+        }
         return "redirect:/groups";
     }
 
@@ -60,8 +60,9 @@ public class GroupController {
                             @RequestParam Integer groupNumber) {
         schoolGroup.setGroupNumber(groupNumber);
 
-        if (groupNumber != null)
+        if (groupNumber != null) {
             schoolGroupRepo.save(schoolGroup);
+        }
         return String.format("redirect:/editGroup/%s", schoolGroup.getId());
     }
 }

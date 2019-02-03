@@ -4,13 +4,13 @@
 <div>
     {{#anygroup}}
         <form method="post" action="/editGroup/{{#id}}{{id}}{{/id}}/patch">
-            {{> addGroupForm}}
+            {{> partials/addGroupForm}}
             <button type="submit">upd group</button>
         </form>
     {{/anygroup}}
     {{^anygroup}}
         <form method="post" action="/addGroup">
-            {{> addGroupForm}}
+            {{> partials/addGroupForm}}
             <button type="submit">add group</button>
         </form>
     {{/anygroup}}

@@ -4,13 +4,13 @@
 <div>
     {{#student}}
         <form method="post" action="/editStudent/{{#id}}{{id}}{{/id}}/patch">
-            {{> addStudentForm}}
+            {{> partials/addStudentForm}}
             <button type="submit">upd student</button>
         </form>
     {{/student}}
     {{^student}}
         <form method="post" action="studentAdd">
-            {{> addStudentForm}}
+            {{> partials/addStudentForm}}
             <button type="submit">add student</button>
         </form>
     {{/student}}

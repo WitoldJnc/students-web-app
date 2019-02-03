@@ -3,7 +3,9 @@
 <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
 <select name="disciplines">
     {{#disciplines}}
-        <option value="{{id}}">{{disciplineName}}</option>
+        <option {{#eq disciplineName disciplineId.disciplineName }}selected{{/eq}}value="{{id}}">
+            {{disciplineName}}
+        </option>
     {{/disciplines}}
 </select>
 <input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">
