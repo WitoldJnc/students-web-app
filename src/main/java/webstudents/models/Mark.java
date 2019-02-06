@@ -25,6 +25,7 @@ public class Mark {
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student studentId;
+
     private Integer mark;
 
     public Mark(Discipline diciplineId, Student studentId, Integer mark) {

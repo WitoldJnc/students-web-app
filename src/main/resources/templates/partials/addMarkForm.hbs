@@ -1,11 +1,33 @@
-<input type="text" name="students" placeholder="student id"
-       value="{{#studentId.id}}{{studentId.id}}{{/studentId.id}}">
-<input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
-<select name="disciplines">
-    {{#disciplines}}
-        <option {{#eq disciplineName disciplineId.disciplineName }}selected{{/eq}}value="{{id}}">
-            {{disciplineName}}
-        </option>
-    {{/disciplines}}
-</select>
-<input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">
+{{#if selectedGroup}}
+    <select name="students">
+        {{#studentInGroup}}
+            <option value="{{id}}">
+                {{firstName}} {{lastName}}
+            </option>
+        {{/studentInGroup}}
+    </select>
+
+    <select name="disciplines">
+        {{#disciplines}}
+            <option value="{{id}}">
+                {{disciplineName}}
+            </option>
+        {{/disciplines}}
+    </select>
+    <input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">
+
+{{else}}
+    <select name="groups">
+        {{#groups}}
+            <option {{#eq selectedGroup.id id}}selected{{/eq}} value="{{id}}">
+                {{groupNumber}}
+            </option>
+        {{/groups}}
+    </select>
+    <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
+{{/if}}
+
+{{#if mark}}
+
+    <input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">
+{{/if}}

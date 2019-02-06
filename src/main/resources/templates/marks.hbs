@@ -19,7 +19,7 @@
 <div>
     <table>
         <tr>
-            <th>student id</th>
+            <th>имя и фамилия студента</th>
             <th>discipline</th>
             <th>mark</th>
             <th>delete</th>
@@ -27,7 +27,7 @@
         </tr>
         {{#marks}}
             <tr>
-                <td>{{#studentId.id}}{{.}}{{/studentId.id}}</td>
+                <td>{{studentId.firstName}} {{studentId.lastName}}</td>
                 <td>{{#disciplineId.disciplineName}}{{.}}{{/disciplineId.disciplineName}}</td>
                 <td>{{#mark}}{{.}}{{/mark}}</td>
                 <td><a href="/deleteMark/{{id}}">delete</a></td>

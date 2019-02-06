@@ -32,7 +32,6 @@ public class Discipline {
             fetch = FetchType.LAZY)
     private Set<Mark> markSet;
 
-
     public Discipline(String disciplineName) {
         this.disciplineName = disciplineName;
     }

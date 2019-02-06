@@ -2,11 +2,11 @@ package webstudents.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,18 +23,17 @@ public class SchoolGroup {
 
     private Integer groupNumber;
 
-
     @JsonIgnore
-    @OneToMany(targetEntity=Student.class,
-            mappedBy="group",cascade=CascadeType.REFRESH,
+    @OneToMany(targetEntity = Student.class,
+            mappedBy = "group", cascade = CascadeType.REFRESH,
             fetch = FetchType.EAGER)
     private List<Student> students;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "group_discipline",
-    joinColumns = {@JoinColumn(name = "group_id")},
-    inverseJoinColumns = {@JoinColumn(name = "discipline_Id")})
-    private Set<Discipline> disciplines;
+            joinColumns = {@JoinColumn(name = "group_id")},
+            inverseJoinColumns = {@JoinColumn(name = "discipline_Id")})
+    private Set<Discipline> disciplines = new HashSet<>();
 
     public SchoolGroup() {
     }
@@ -42,6 +41,5 @@ public class SchoolGroup {
     public SchoolGroup(Integer groupNumber) {
         this.groupNumber = groupNumber;
     }
-
 
 }
