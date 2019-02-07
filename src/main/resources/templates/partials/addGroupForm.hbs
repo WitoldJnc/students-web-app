@@ -11,7 +11,8 @@
 {{#if groups}}
     <select name="disciplines" multiple>
         {{#allDisciplines}}
-            <option value="{{id}}">{{disciplineName}}</option>
+            <option{{#if disciplines}} selected {{/if}} value="{{id}}">{{disciplineName}}</option>
         {{/allDisciplines}}
     </select>
 {{/if}}
+

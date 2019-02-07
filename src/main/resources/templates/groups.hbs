@@ -19,15 +19,13 @@
 <div>
     <table>
         <tr>
-            <th>id группы</th>
             <th>номер группы</th>
             <th>delete</th>
             <th>edit</th>
         </tr>
         {{#each groups}}
             <tr>
-                <td><a href="/members/{{id}}">{{id}}</a></td>
-                <td>{{groupNumber}}</td>
+                <td><a href="/members/{{id}}">{{groupNumber}}</a></td>
                 <td><a href="/deleteGroup/{{id}}">delete</a></td>
                 <td><a href="/editGroup/{{id}}">edit</a></td>
             </tr>

@@ -10,8 +10,6 @@ import webstudents.models.Student;
 import webstudents.repo.SchoolGroupRepo;
 import webstudents.repo.StudentRepo;
 
-import java.util.List;
-
 @Controller
 public class StudentController {
 
@@ -75,30 +73,24 @@ public class StudentController {
     @RequestMapping("/filter")
     public String filter(@RequestParam String filter,
                          Model model) {
-        List<Student> byFirstName;
 
-        if (filter != null && !filter.isEmpty()) {
-            byFirstName = studentRepo.findByFirstName(filter);
-        } else {
-            return "redirect:/students";
-        }
-        model.addAttribute("students", byFirstName);
-        return "students";
+        model.addAttribute("students", studentRepo.findByFirstName(filter));
+
+        return (filter != null && !filter.isEmpty()) ?
+                "students" : "redirect:/students";
     }
 
     @RequestMapping("/filterLastName")
     public String filterLastName(@RequestParam String filterLastName,
                                  Model model) {
-        List<Student> lastName;
 
-        if (filterLastName != null && !filterLastName.isEmpty()) {
-            lastName = studentRepo.findByLastName(filterLastName);
-        } else {
-            return "redirect:/students";
-        }
-        model.addAttribute("students", lastName);
-        return "students";
+        model.addAttribute("students", studentRepo.findByLastName(filterLastName));
+
+        return (filterLastName != null && !filterLastName.isEmpty()) ?
+                "students" : "redirect:/students";
+
     }
+
 }
 
 

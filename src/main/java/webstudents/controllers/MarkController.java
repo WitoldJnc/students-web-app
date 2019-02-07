@@ -51,6 +51,8 @@ public class MarkController {
             markRepo.save(mark1);
             return "redirect:/marks";
         }
+
+        model.addAttribute("groupNumber", student != null ? student.getGroup().getGroupNumber() : null);
         model.addAttribute("disciplines", group.getDisciplines());
         model.addAttribute("studentInGroup", studentRepo.findAllByGroupId(group.getId()));
         model.addAttribute("marks", markRepo.findAll());
@@ -77,7 +79,7 @@ public class MarkController {
     public String editMark(@PathVariable("id") Mark markmodel,
                            @RequestParam(value = "mark") Integer mark) {
 
-        if (mark != null ) {
+        if (mark != null) {
             markmodel.setMark(mark);
             markRepo.save(markmodel);
 

@@ -1,5 +1,6 @@
 package webstudents.controllers;
 
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,8 @@ import webstudents.repo.DisciplineRepo;
 import webstudents.repo.SchoolGroupRepo;
 import webstudents.repo.StudentRepo;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
 
 @Controller
 public class GroupController {
@@ -44,7 +46,8 @@ public class GroupController {
                            @RequestParam(value = "disciplines", required = false) Discipline... discipline) {
         if (groupNumber != null && discipline != null) {
             SchoolGroup schoolGroup = new SchoolGroup();
-            Set<Discipline> disciplines = new HashSet<>(Arrays.asList(discipline));
+
+            val disciplines = new HashSet<>(Arrays.asList(discipline));
 
             schoolGroup.setDisciplines(disciplines);
             schoolGroup.setGroupNumber(groupNumber);
@@ -69,6 +72,8 @@ public class GroupController {
         model.addAttribute("anygroup", schoolGroup);
         model.addAttribute("groups", schoolGroupRepo.findAll());
         model.addAttribute("allDisciplines", disciplineRepo.findAll());
+
+
         return "groups";
     }
 
@@ -77,7 +82,7 @@ public class GroupController {
                             @RequestParam Integer groupNumber,
                             @RequestParam(value = "disciplines", required = false) Discipline... discipline) {
 
-        Set<Discipline> disciplines = new HashSet<>(Arrays.asList(discipline));
+        val disciplines = new HashSet<>(Arrays.asList(discipline));
 
         schoolGroup.setDisciplines(disciplines);
         schoolGroup.setGroupNumber(groupNumber);

@@ -19,14 +19,16 @@
 <div>
     <table>
         <tr>
-            <th>имя и фамилия студента</th>
-            <th>discipline</th>
-            <th>mark</th>
+            <th>Номер группы</th>
+            <th>Имя и фамилия</th>
+            <th>Дисциплина</th>
+            <th>Оценка</th>
             <th>delete</th>
             <th>edit</th>
         </tr>
         {{#marks}}
             <tr>
+                <td>{{studentId.group.groupNumber}}</td>
                 <td>{{studentId.firstName}} {{studentId.lastName}}</td>
                 <td>{{#disciplineId.disciplineName}}{{.}}{{/disciplineId.disciplineName}}</td>
                 <td>{{#mark}}{{.}}{{/mark}}</td>
