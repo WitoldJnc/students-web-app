@@ -15,6 +15,7 @@ public class DisciplineController {
 
     @GetMapping("/disciplines")
     public String showAllDisc(Model model) {
+
         model.addAttribute("disciplines", disciplineRepo.findAll());
         return "disciplines";
     }
@@ -23,15 +24,14 @@ public class DisciplineController {
     public String addDiscipline(@RequestParam String disciplineName,
                                 Model model) {
 
-        if (!disciplineName.isEmpty()) {
-            model.addAttribute("disciplines",
-                    disciplineRepo.save(new Discipline(disciplineName)));
-        }
+        model.addAttribute("disciplines", disciplineRepo.save(new Discipline(disciplineName)));
+
         return "redirect:/disciplines";
     }
 
     @RequestMapping("/deleteDiscipline/{id}")
     public String deleDicipline(@PathVariable("id") int id) {
+
         disciplineRepo.deleteById(id);
         return "redirect:/disciplines";
     }
@@ -49,10 +49,8 @@ public class DisciplineController {
     public String editDiscipline(@PathVariable("id") Discipline discipline,
                                  @RequestParam String disciplineName) {
         discipline.setDisciplineName(disciplineName);
+        disciplineRepo.save(discipline);
 
-        if (!disciplineName.isEmpty()) {
-            disciplineRepo.save(discipline);
-        }
         return String.format("redirect:/editDiscipline/%s", discipline.getId());
     }
 

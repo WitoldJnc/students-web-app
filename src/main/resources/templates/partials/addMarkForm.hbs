@@ -14,7 +14,8 @@
             </option>
         {{/disciplines}}
     </select>
-    <input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">
+    <input required type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}"
+           pattern="^(?:[1-9]|0[1-9]|10)$">
 
 {{else}}
     <select name="groups">
@@ -28,7 +29,7 @@
 {{/if}}
 
 {{#if mark}}
-
-        {{studentId.firstName}} {{studentId.lastName}} :
-        <input type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}">
+    <label for="mark"> {{studentId.firstName}} {{studentId.lastName}} :</label>
+    <input required type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}"
+           pattern="^(?:[1-9]|0[1-9]|10)$">
 {{/if}}

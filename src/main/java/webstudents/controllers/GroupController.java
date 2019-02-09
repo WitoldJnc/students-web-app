@@ -1,6 +1,7 @@
 package webstudents.controllers;
 
 import lombok.val;
+import org.apache.commons.collections4.SetUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import webstudents.repo.StudentRepo;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 @Controller
 public class GroupController {
@@ -29,6 +31,7 @@ public class GroupController {
     @GetMapping("/groups")
     public String showAll(Model model) {
         model.addAttribute("groups", schoolGroupRepo.findAll());
+        model.addAttribute("notChosenDiscipline", disciplineRepo.findAll());
         return "groups";
     }
 
@@ -41,24 +44,20 @@ public class GroupController {
     }
 
     @PostMapping("/addGroup")
-    public String addGroup(@RequestParam Integer groupNumber,
-                           Model model,
+    public String addGroup(@RequestParam Integer groupNumber, Model model,
                            @RequestParam(value = "disciplines", required = false) Discipline... discipline) {
-        if (groupNumber != null && discipline != null) {
-            SchoolGroup schoolGroup = new SchoolGroup();
 
-            val disciplines = new HashSet<>(Arrays.asList(discipline));
+        SchoolGroup schoolGroup = new SchoolGroup();
+        val disciplines = new HashSet<>(Arrays.asList(discipline));
 
-            schoolGroup.setDisciplines(disciplines);
-            schoolGroup.setGroupNumber(groupNumber);
+        schoolGroup.setDisciplines(disciplines);
+        schoolGroup.setGroupNumber(groupNumber);
 
-            model.addAttribute("groups", schoolGroupRepo.save(schoolGroup));
+        model.addAttribute("groups", schoolGroupRepo.save(schoolGroup));
 
-            return "redirect:/groups";
-        }
         model.addAttribute("disciplines", disciplineRepo.findAll());
         model.addAttribute("groups", schoolGroupRepo.findAll());
-        return "groups";
+        return "redirect:/groups";
     }
 
     @RequestMapping("/deleteGroup/{id}")
@@ -69,11 +68,14 @@ public class GroupController {
 
     @RequestMapping("editGroup/{id}")
     public String editGroupRender(@PathVariable("id") SchoolGroup schoolGroup, Model model) {
-        model.addAttribute("anygroup", schoolGroup);
+        model.addAttribute("editingGroup", schoolGroup);
         model.addAttribute("groups", schoolGroupRepo.findAll());
         model.addAttribute("allDisciplines", disciplineRepo.findAll());
 
+        val disciplineSet = new LinkedHashSet<>(disciplineRepo.findAll());
 
+        model.addAttribute("notChosenDiscipline ", SetUtils
+                .difference(disciplineSet, schoolGroup.getDisciplines()));
         return "groups";
     }
 
@@ -86,9 +88,8 @@ public class GroupController {
 
         schoolGroup.setDisciplines(disciplines);
         schoolGroup.setGroupNumber(groupNumber);
-        if (groupNumber != null) {
-            schoolGroupRepo.save(schoolGroup);
-        }
+        schoolGroupRepo.save(schoolGroup);
+
         return String.format("redirect:/editGroup/%s", schoolGroup.getId());
     }
 }

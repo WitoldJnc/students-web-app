@@ -2,18 +2,18 @@
 <body>
 {{> index}}
 <div>
-    {{#anygroup}}
+    {{#editingGroup}}
         <form method="post" action="/editGroup/{{#id}}{{id}}{{/id}}/patch">
             {{> partials/addGroupForm}}
             <button type="submit">upd group</button>
         </form>
-    {{/anygroup}}
-    {{^anygroup}}
+    {{/editingGroup}}
+    {{^editingGroup}}
         <form method="post" action="/addGroup">
             {{> partials/addGroupForm}}
             <button type="submit">add group</button>
         </form>
-    {{/anygroup}}
+    {{/editingGroup}}
 </div>
 <div>Список групп</div>
 <div>

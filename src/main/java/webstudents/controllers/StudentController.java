@@ -1,5 +1,6 @@
 package webstudents.controllers;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,17 +34,17 @@ public class StudentController {
                       @RequestParam(value = "group") SchoolGroup schoolGroup) {
         Student student = new Student(firstName, lastName);
         student.setGroup(schoolGroup);
-        if (!firstName.isEmpty() && !lastName.isEmpty()) {
-            studentRepo.save(student);
-        }
+
+        studentRepo.save(student);
+
         return "redirect:/students";
     }
 
     @RequestMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id,
-                         RedirectAttributes redirect) {
+    public String delete(@PathVariable("id") int id) {
+
         studentRepo.deleteById(id);
-        redirect.addFlashAttribute("success", "Deleted student successfully!");
+
         return "redirect:/students";
     }
 
@@ -60,13 +61,12 @@ public class StudentController {
                        @RequestParam(value = "firstName") String firstName,
                        @RequestParam(value = "lastName") String lastName,
                        @RequestParam(value = "group") SchoolGroup schoolGroup) {
+
         student.setFirstName(firstName);
         student.setLastName(lastName);
         student.setGroup(schoolGroup);
+        studentRepo.save(student);
 
-        if (!firstName.isEmpty() && !lastName.isEmpty()) {
-            studentRepo.save(student);
-        }
         return String.format("redirect:/editStudent/%s", student.getId());
     }
 
@@ -76,8 +76,9 @@ public class StudentController {
 
         model.addAttribute("students", studentRepo.findByFirstName(filter));
 
-        return (filter != null && !filter.isEmpty()) ?
-                "students" : "redirect:/students";
+        return StringUtils.isNotEmpty(filter)
+                ? "students"
+                : "redirect:/students";
     }
 
     @RequestMapping("/filterLastName")
@@ -86,8 +87,9 @@ public class StudentController {
 
         model.addAttribute("students", studentRepo.findByLastName(filterLastName));
 
-        return (filterLastName != null && !filterLastName.isEmpty()) ?
-                "students" : "redirect:/students";
+        return StringUtils.isNotEmpty(filterLastName)
+                ? "students"
+                : "redirect:/students";
 
     }
 

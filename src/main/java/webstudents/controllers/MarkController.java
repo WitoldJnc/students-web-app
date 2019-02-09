@@ -43,15 +43,13 @@ public class MarkController {
                            @RequestParam(value = "mark", required = false) Integer mark,
                            @RequestParam(value = "groups", required = false) SchoolGroup group, Model model) {
 
-        model.addAttribute("selectedGroup", group);
-        Mark mark1 = new Mark(mark);
-        mark1.setDisciplineId(discipline);
-        mark1.setStudentId(student);
-        if (mark != null && student != null) {
-            markRepo.save(mark1);
+        if (student != null) {
+            markRepo.save(new Mark(discipline, student, mark));
+
             return "redirect:/marks";
         }
 
+        model.addAttribute("selectedGroup", group);
         model.addAttribute("groupNumber", student != null ? student.getGroup().getGroupNumber() : null);
         model.addAttribute("disciplines", group.getDisciplines());
         model.addAttribute("studentInGroup", studentRepo.findAllByGroupId(group.getId()));
@@ -62,16 +60,20 @@ public class MarkController {
 
     @RequestMapping("/deleteMark/{id}")
     public String deleteMark(@PathVariable("id") int id) {
+
         markRepo.deleteById(id);
+
         return "redirect:/marks";
     }
 
     @RequestMapping("/editMark/{id}")
     public String editMarkRendeer(@PathVariable("id") Mark mark, Model model) {
+
         model.addAttribute("disciplines", disciplineRepo.findAll());
         model.addAttribute("mark", mark);
         model.addAttribute("marks", markRepo.findAll());
         model.addAttribute("students", studentRepo.findAll());
+
         return "marks";
     }
 
@@ -79,11 +81,9 @@ public class MarkController {
     public String editMark(@PathVariable("id") Mark markmodel,
                            @RequestParam(value = "mark") Integer mark) {
 
-        if (mark != null) {
-            markmodel.setMark(mark);
-            markRepo.save(markmodel);
+        markmodel.setMark(mark);
+        markRepo.save(markmodel);
 
-        }
         return String.format("redirect:/editMark/%s", markmodel.getId());
     }
 }

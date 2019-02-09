@@ -1,18 +1,16 @@
 <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
-<input type="text" name="groupNumber" placeholder="group number"
-       value="{{#groupNumber}}{{groupNumber}}{{/groupNumber}}">
+<input required type="text" name="groupNumber" placeholder="group number"
+       value="{{#groupNumber}}{{groupNumber}}{{/groupNumber}}"
+pattern="\d{1,9}">
 
 <select name="disciplines" multiple>
-    {{#disciplines}}
+    {{#notChosenDiscipline}}
         <option value="{{id}}">{{disciplineName}}</option>
-    {{/disciplines}}
+    {{/notChosenDiscipline}}
+    {{#editingGroup.disciplines}}
+        <option selected value="{{id}}">{{disciplineName}}</option>
+    {{/editingGroup.disciplines}}
 </select>
 
-{{#if groups}}
-    <select name="disciplines" multiple>
-        {{#allDisciplines}}
-            <option{{#if disciplines}} selected {{/if}} value="{{id}}">{{disciplineName}}</option>
-        {{/allDisciplines}}
-    </select>
-{{/if}}
+
 
