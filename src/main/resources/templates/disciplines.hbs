@@ -1,44 +1,51 @@
 <html>
+<head>
+    <link rel="stylesheet" href="/background.css"/>
+    <link rel="stylesheet" href="/tables.css"/>
+    <link rel="stylesheet" href="/inputs.css"/>
+</head>
 <body>
 {{> index}}
-<div>
-    {{#disciplineForEdit}}
-        <form method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
-            {{> partials/addDisciplineForm}}
+<div class="block-outer">
+    <div class="block-inner">
+        <div class="form-container">
+            {{#disciplineForEdit}}
+                <form method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
+                    {{> partials/addDisciplineForm}}
 
-            <button type="submit">upd discipline</button>
-        </form>
-    {{/disciplineForEdit}}
-    {{^disciplineForEdit}}
-        <form method="post" action="/addDiscipline">
-            {{> partials/addDisciplineForm}}
+                    <button class="submit" type="submit">upd discipline</button>
+                </form>
+            {{/disciplineForEdit}}
+            {{^disciplineForEdit}}
+                <form method="post" action="/addDiscipline">
+                    {{> partials/addDisciplineForm}}
 
-            <button type="submit">add discipline</button>
-        </form>
-    {{/disciplineForEdit}}
+                    <button class="submit" type="submit">add discipline</button>
+                </form>
+            {{/disciplineForEdit}}
+        </div>
+
+        <div class="table-name">Список дисциплин</div>
+        <div>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>название дисциплины</th>
+                    <th>delete</th>
+                    <th>edit</th>
+                </tr>
+                {{#disciplines}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{#disciplineName}}{{.}}{{/disciplineName}}</td>
+                        <td><a href="/deleteDiscipline/{{id}}">delete</a></td>
+                        <td><a href="/editDiscipline/{{id}}">edit</a></td>
+                    </tr>
+                {{/disciplines}}
+            </table>
+        </div>
+    </div>
 </div>
-
-<div>Список дисциплин</div>
-<div>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>название дисциплины</th>
-            <th>delete</th>
-            <th>edit</th>
-        </tr>
-        {{#disciplines}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{#disciplineName}}{{.}}{{/disciplineName}}</td>
-                <td><a href="/deleteDiscipline/{{id}}">delete</a></td>
-                <td><a href="/editDiscipline/{{id}}">edit</a></td>
-            </tr>
-        {{/disciplines}}
-    </table>
-
-</div>
-
 </body>
 </html>
 

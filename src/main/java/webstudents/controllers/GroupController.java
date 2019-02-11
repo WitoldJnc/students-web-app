@@ -74,7 +74,7 @@ public class GroupController {
 
         val disciplineSet = new LinkedHashSet<>(disciplineRepo.findAll());
 
-        model.addAttribute("notChosenDiscipline ", SetUtils
+        model.addAttribute("notChosenDiscipline", SetUtils
                 .difference(disciplineSet, schoolGroup.getDisciplines()));
         return "groups";
     }

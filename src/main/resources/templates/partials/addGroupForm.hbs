@@ -1,16 +1,16 @@
 <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
 <input required type="text" name="groupNumber" placeholder="group number"
        value="{{#groupNumber}}{{groupNumber}}{{/groupNumber}}"
-pattern="\d{1,9}">
+       pattern="\d{1,9}" oninvalid="this.setCustomValidity('Только числа')">
 
-<select name="disciplines" multiple>
-    {{#notChosenDiscipline}}
-        <option value="{{id}}">{{disciplineName}}</option>
-    {{/notChosenDiscipline}}
-    {{#editingGroup.disciplines}}
-        <option selected value="{{id}}">{{disciplineName}}</option>
-    {{/editingGroup.disciplines}}
-</select>
-
-
+<div class="multiple-select">
+    <select name="disciplines" size="3" multiple>
+        {{#notChosenDiscipline}}
+            <option value="{{id}}">{{disciplineName}}</option>
+        {{/notChosenDiscipline}}
+        {{#editingGroup.disciplines}}
+            <option selected value="{{id}}">{{disciplineName}}</option>
+        {{/editingGroup.disciplines}}
+    </select>
+</div>
 

@@ -1,35 +1,36 @@
 {{#if selectedGroup}}
-    <select name="students">
-        {{#studentInGroup}}
-            <option value="{{id}}">
-                {{firstName}} {{lastName}}
-            </option>
-        {{/studentInGroup}}
-    </select>
-
-    <select name="disciplines">
-        {{#disciplines}}
-            <option value="{{id}}">
-                {{disciplineName}}
-            </option>
-        {{/disciplines}}
-    </select>
+    <div class="ddl-select">
+        <select name="students">
+            {{#studentInGroup}}
+                <option value="{{id}}">
+                    {{firstName}} {{lastName}}
+                </option>
+            {{/studentInGroup}}
+        </select>
+    </div>
+    <div class="ddl-select">
+        <select name="disciplines">
+            {{#disciplines}}
+                <option value="{{id}}">
+                    {{disciplineName}}
+                </option>
+            {{/disciplines}}
+        </select>
+    </div>
     <input required type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}"
-           pattern="^(?:[1-9]|0[1-9]|10)$">
+           pattern="^(?:[1-9]|0[1-9]|10)$" oninvalid="this.setCustomValidity('Только числа от 1 до 10')">
 
 {{else}}
-    <select name="groups">
-        {{#groups}}
-            <option {{#eq selectedGroup.id id}}selected{{/eq}} value="{{id}}">
-                {{groupNumber}}
-            </option>
-        {{/groups}}
-    </select>
+    <div class="ddl-select">
+        <select name="groups">
+            {{#groups}}
+                <option {{#eq selectedGroup.id id}}selected{{/eq}} value="{{id}}">
+                    {{groupNumber}}
+                </option>
+            {{/groups}}
+        </select>
+    </div>
     <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
 {{/if}}
 
-{{#if mark}}
-    <label for="mark"> {{studentId.firstName}} {{studentId.lastName}} :</label>
-    <input required type="text" name="mark" placeholder="mark" value="{{#mark}}{{mark}}{{/mark}}"
-           pattern="^(?:[1-9]|0[1-9]|10)$">
-{{/if}}
+{{> partials/editMarkForm}}
