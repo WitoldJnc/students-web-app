@@ -4,18 +4,23 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+        classpath 'org.liquibase:liquibase-gradle-plugin:1.2.0'
+        classpath 'mysql:mysql-connector-java:8.0.14'
     }
 }
+
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'liquibase'
 
 bootJar {
     baseName = 'gs-serving-web-content'
-    version =  '0.1.0'
+    version = '0.1.0'
 }
 
 repositories {
@@ -41,3 +46,17 @@ dependencies {
 
 }
 
+
+
+liquibase {
+    activities {
+        main {
+            changeLogFile 'src/main/resources/db/changelog/db.changelog-master.xml'
+            url 'jdbc:mysql://localhost:3306/students?allowPublicKeyRetrieval=true&true&useSSL=false'
+            username 'root'
+            password 'root'
+            classpath "$rootDir"
+        }
+    }
+    runList = 'main'
+}
