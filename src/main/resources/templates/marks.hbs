@@ -1,0 +1,55 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/background.css"/>
+    <link rel="stylesheet" href="/tables.css"/>
+    <link rel="stylesheet" href="/input.css"/>
+</head>
+<body>
+{{> index}}
+<div class="block-outer">
+    <div class="block-inner">
+        <div class="form-container">
+            {{#mark}}
+                <form method="post" action="/editMark/{{#id}}{{id}}{{/id}}/patch">
+                    {{> partials/addMarkForm}}
+                    <button class="submit" type="submit">upd mark</button>
+                </form>
+            {{/mark}}
+            {{^mark}}
+                <form method="post" action="/addMarks">
+                    {{> partials/addMarkForm}}
+                    <button class="submit" type="submit">add mark</button>
+                </form>
+            {{/mark}}
+        </div>
+        <div class="table-name">табель оценок</div>
+        <div>
+            <table>
+                <tr>
+                    <th>Номер группы</th>
+                    <th>Имя и фамилия</th>
+                    <th>Дисциплина</th>
+                    <th>Оценка</th>
+                    <th>delete</th>
+                    <th>edit</th>
+                </tr>
+                {{#marks}}
+                    <tr>
+                        <td>{{studentId.group.groupNumber}}</td>
+                        <td>{{studentId.firstName}} {{studentId.lastName}}</td>
+                        <td>{{#disciplineId.disciplineName}}{{.}}{{/disciplineId.disciplineName}}</td>
+                        <td>{{#mark}}{{.}}{{/mark}}</td>
+                        <td><a href="/deleteMark/{{id}}">delete</a></td>
+                        <td><a href="/editMark/{{id}}">edit</a></td>
+                    </tr>
+
+                {{/marks}}
+            </table>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

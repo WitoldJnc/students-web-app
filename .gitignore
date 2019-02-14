@@ -35,6 +35,9 @@ out
 /subprojects/*/build
 /subprojects/docs/src/samples/**/build
 /subprojects/internal-android-performance-testing/build-android-libs
+!gradle-wrapper.jar
+.gradletasknamecache
+gradle/wrapper/gradle-wrapper.properties
 
 # Package Files #
 *.jar

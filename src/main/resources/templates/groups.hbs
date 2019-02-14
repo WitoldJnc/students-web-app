@@ -1,0 +1,47 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/background.css"/>
+    <link rel="stylesheet" href="/tables.css"/>
+    <link rel="stylesheet" href="/input.css"/>
+</head>
+<body>
+{{> index}}
+
+<div class="block-outer">
+    <div class="block-inner">
+        <div class="form-container">
+            {{#editingGroup}}
+                <form method="post" action="/editGroup/{{#id}}{{id}}{{/id}}/patch">
+                    {{> partials/addGroupForm}}
+                    <button class="submit" type="submit">upd group</button>
+                </form>
+            {{/editingGroup}}
+            {{^editingGroup}}
+                <form method="post" action="/addGroup">
+                    {{> partials/addGroupForm}}
+                    <button class="submit" type="submit">add group</button>
+                </form>
+            {{/editingGroup}}
+        </div>
+        <div class="table-name">Список групп</div>
+        <div>
+            <table>
+                <tr>
+                    <th>номер группы</th>
+                    <th>delete</th>
+                    <th>edit</th>
+                </tr>
+                {{#each groups}}
+                    <tr>
+                        <td><a href="/members/{{id}}">{{groupNumber}}</a></td>
+                        <td><a href="/deleteGroup/{{id}}">delete</a></td>
+                        <td><a href="/editGroup/{{id}}">edit</a></td>
+                    </tr>
+                {{/each}}
+            </table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/students?allowPublicKeyRetrieval=true&true&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
+
+
+
+handlebars:
+  prefix: /templates
+  suffix: .hbs

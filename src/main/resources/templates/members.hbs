@@ -1,0 +1,33 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/background.css"/>
+    <link rel="stylesheet" href="/tables.css"/>
+</head>
+<body>
+{{> index}}
+<div class="block-outer">
+    <div class="block-inner">
+        <div>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>Имя</th>
+                    <th>Фамиоия</th>
+
+                </tr>
+                {{#students}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{firstName}}</td>
+                        <td>{{lastName}}</td>
+                    </tr>
+                {{/students}}
+            </table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,15 @@
+<input required type="text" name="firstName" placeholder="Имя" value="{{#firstName}}{{firstName}}{{/firstName}}"
+       pattern="^[а-яА-ЯёЁa-zA-Z]+$" {{> partials/defaultRequiredText}}>
+<input required type="text" name="lastName" placeholder="Фамилия" value="{{#lastName}}{{lastName}}{{/lastName}}"
+       pattern="^[а-яА-ЯёЁa-zA-Z]+$" {{> partials/defaultRequiredText}}>
+<input type="hidden" name="id" value="{{#id}}{{id}}{{/id}}">
+
+<div class="ddl-select">
+    <select name="group">
+        {{#groups}}
+            <option {{#eq groupNumber group.groupNumber}}selected{{/eq}} value="{{id}}">
+                {{groupNumber}}
+            </option>
+        {{/groups}}
+    </select>
+</div>

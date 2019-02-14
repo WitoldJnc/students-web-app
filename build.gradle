@@ -4,18 +4,22 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+        classpath 'org.liquibase:liquibase-gradle-plugin:1.2.0'
+        classpath 'mysql:mysql-connector-java:8.0.14'
     }
 }
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'liquibase'
 
 bootJar {
     baseName = 'gs-serving-web-content'
-    version =  '0.1.0'
+    version = '0.1.0'
 }
 
 repositories {
@@ -26,8 +30,11 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-mustache")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation 'com.github.jknack:handlebars-helpers:4.1.2'
+    compile group: 'com.github.jknack', name: 'handlebars-springmvc', version: '4.1.2'
     compile("org.springframework.boot:spring-boot-devtools")
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
@@ -36,5 +43,19 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.14'
     compileOnly 'org.projectlombok:lombok:1.18.4'
     testCompile("junit:junit")
+}
+
+//TODO разобраться с груви и юзать проперти из файла. здесь оставить только ссылки
+liquibase {
+    activities {
+        main {
+            changeLogFile 'src/main/resources/db/changelog/db.changelog-master.xml'
+            url 'jdbc:mysql://localhost:3306/students?allowPublicKeyRetrieval=true&true&useSSL=false'
+            username 'root'
+            password 'root'
+            classpath "$rootDir"
+        }
+    }
+    runList = 'main'
 }
 

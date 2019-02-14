@@ -1,0 +1,5 @@
+<input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
+<input required type="text" name="disciplineName" placeholder="Название дисциплины"
+       value="{{#disciplineName}}{{disciplineName}}{{/disciplineName}}" pattern="^[а-яА-ЯёЁa-zA-Z]+$"
+    {{> partials/defaultRequiredText}}>
+
