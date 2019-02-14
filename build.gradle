@@ -10,7 +10,6 @@ buildscript {
 }
 
 
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -31,6 +30,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+    compile("org.springframework.boot:spring-boot-starter-security")
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation 'com.github.jknack:handlebars-helpers:4.1.2'
@@ -43,11 +43,9 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.14'
     compileOnly 'org.projectlombok:lombok:1.18.4'
     testCompile("junit:junit")
-
 }
 
-
-
+//TODO разобраться с груви и юзать проперти из файла. здесь оставить только ссылки
 liquibase {
     activities {
         main {
@@ -60,3 +58,4 @@ liquibase {
     }
     runList = 'main'
 }
+

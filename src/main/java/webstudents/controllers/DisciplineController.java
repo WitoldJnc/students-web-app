@@ -16,7 +16,7 @@ public class DisciplineController {
     @GetMapping("/disciplines")
     public String showAllDisc(Model model) {
 
-        model.addAttribute("disciplines", disciplineRepo.findAll());
+        commonModelMapping(model);
         return "disciplines";
     }
 
@@ -24,7 +24,7 @@ public class DisciplineController {
     public String addDiscipline(@RequestParam String disciplineName,
                                 Model model) {
 
-        model.addAttribute("disciplines", disciplineRepo.save(new Discipline(disciplineName)));
+         disciplineRepo.save(new Discipline(disciplineName));
 
         return "redirect:/disciplines";
     }
@@ -40,7 +40,7 @@ public class DisciplineController {
     public String editDisciplineRender(@PathVariable("id") Discipline discipline,
                                        Model model) {
         model.addAttribute("disciplineForEdit", discipline);
-        model.addAttribute("disciplines", disciplineRepo.findAll());
+        commonModelMapping(model);
 
         return "disciplines";
     }
@@ -54,6 +54,9 @@ public class DisciplineController {
         return String.format("redirect:/editDiscipline/%s", discipline.getId());
     }
 
+    private void commonModelMapping(Model model){
+        model.addAttribute("disciplines", disciplineRepo.findAll());
+    }
 }
 
 

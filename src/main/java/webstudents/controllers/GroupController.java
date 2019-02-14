@@ -30,7 +30,7 @@ public class GroupController {
 
     @GetMapping("/groups")
     public String showAll(Model model) {
-        model.addAttribute("groups", schoolGroupRepo.findAll());
+        commonModelMapping(model);
         model.addAttribute("notChosenDiscipline", disciplineRepo.findAll());
         return "groups";
     }
@@ -55,8 +55,7 @@ public class GroupController {
 
         model.addAttribute("groups", schoolGroupRepo.save(schoolGroup));
 
-        model.addAttribute("disciplines", disciplineRepo.findAll());
-        model.addAttribute("groups", schoolGroupRepo.findAll());
+        commonModelMapping(model);
         return "redirect:/groups";
     }
 
@@ -68,12 +67,12 @@ public class GroupController {
 
     @RequestMapping("editGroup/{id}")
     public String editGroupRender(@PathVariable("id") SchoolGroup schoolGroup, Model model) {
-        model.addAttribute("editingGroup", schoolGroup);
-        model.addAttribute("groups", schoolGroupRepo.findAll());
-        model.addAttribute("allDisciplines", disciplineRepo.findAll());
+
+        commonModelMapping(model);
 
         val disciplineSet = new LinkedHashSet<>(disciplineRepo.findAll());
 
+        model.addAttribute("editingGroup", schoolGroup);
         model.addAttribute("notChosenDiscipline", SetUtils
                 .difference(disciplineSet, schoolGroup.getDisciplines()));
         return "groups";
@@ -91,6 +90,12 @@ public class GroupController {
         schoolGroupRepo.save(schoolGroup);
 
         return String.format("redirect:/editGroup/%s", schoolGroup.getId());
+    }
+
+    private void commonModelMapping(Model model) {
+        model.addAttribute("groups", schoolGroupRepo.findAll());
+        model.addAttribute("allDisciplines", disciplineRepo.findAll());
+        model.addAttribute("disciplines", disciplineRepo.findAll());
     }
 }
 

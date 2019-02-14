@@ -30,9 +30,7 @@ public class MarkController {
 
     @GetMapping("/marks")
     public String findAllMarks(Model model) {
-        model.addAttribute("marks", markRepo.findAll());
-        model.addAttribute("groups", schoolGroupRepo.findAll());
-        model.addAttribute("stud", studentRepo.findAll());
+        commonModelMapping(model);
 
         return "marks";
     }
@@ -50,11 +48,9 @@ public class MarkController {
         }
 
         model.addAttribute("selectedGroup", group);
-        model.addAttribute("groupNumber", student != null ? student.getGroup().getGroupNumber() : null);
         model.addAttribute("disciplines", group.getDisciplines());
         model.addAttribute("studentInGroup", studentRepo.findAllByGroupId(group.getId()));
-        model.addAttribute("marks", markRepo.findAll());
-        model.addAttribute("groups", schoolGroupRepo.findAll());
+        commonModelMapping(model);
         return "marks";
     }
 
@@ -69,11 +65,9 @@ public class MarkController {
     @RequestMapping("/editMark/{id}")
     public String editMarkRendeer(@PathVariable("id") Mark mark, Model model) {
 
-        model.addAttribute("disciplines", disciplineRepo.findAll());
         model.addAttribute("mark", mark);
-        model.addAttribute("marks", markRepo.findAll());
-        model.addAttribute("students", studentRepo.findAll());
 
+        commonModelMapping(model);
         return "marks";
     }
 
@@ -85,5 +79,11 @@ public class MarkController {
         markRepo.save(markmodel);
 
         return String.format("redirect:/editMark/%s", markmodel.getId());
+    }
+
+    private void commonModelMapping(Model model) {
+        model.addAttribute("marks", markRepo.findAll());
+        model.addAttribute("groups", schoolGroupRepo.findAll());
+        model.addAttribute("disciplines", disciplineRepo.findAll());
     }
 }
