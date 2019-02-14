@@ -2,11 +2,8 @@ package webstudents.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import webstudents.models.User;
+import webstudents.models.Role;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer> {
-
-    User findByUsername(String username);
-
+public interface RoleRepo extends JpaRepository<Role, Integer> {
 }
