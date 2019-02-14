@@ -1,0 +1,33 @@
+<html>
+<body>
+{{#user}}
+    <div>
+        <form method="post" action="/editUser/{{#id}}{{id}}{{/id}}/patch">
+            {{> partials/editUserForm}}
+            <button type="submit">upd</button>
+        </form>
+    </div>
+{{/user}}
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>Логин</th>
+        <th>Пароль</th>
+        <th>Роль</th>
+        <th>delete</th>
+        <th>edit</th>
+    </tr>
+    {{#users}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{username}}</td>
+            <td>{{password}}</td>
+            <td>{{roles.userRole}}</td>
+            <td><a href="/deleteUser/{{id}}">delete</a></td>
+            <td><a href="/editUser/{{id}}">edit</a></td>
+        </tr>
+    {{/users}}
+</table>
+</body>
+</html>

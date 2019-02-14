@@ -1,0 +1,12 @@
+<input type="hidden" name="id" value="{{#id}}{{id}}{{/id}}">
+<input required type="text" name="username" placeholder="username"
+       value="{{#username}}{{username}}{{/username}}">
+<input required type="text" name="password" placeholder="password"
+       value="{{#password}}{{password}}{{/password}}">
+<select name="role">
+    {{#edit-role}}
+        <option {{#eq  userRole roles.userRole}}selected{{/eq}} value="{{id}}">
+            {{userRole}}
+        </option>
+    {{/edit-role}}
+</select>
