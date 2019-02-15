@@ -18,4 +18,6 @@ public class UserDetailService implements UserDetailsService {
         return userRepo.findByUsername(username);
     }
 
+    private static final String ONLY_ADMIN_AND_MODER = "hasAuthority('ADMIN') or hasAuthority('MODER')";
+
 }

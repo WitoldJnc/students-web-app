@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -26,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
 
     @Bean
-    public PasswordEncoder encoder(){
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(8);
     }
 
@@ -35,18 +34,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/**/*.css").permitAll()
                 .antMatchers(
-                        "/login", "/students", "/groups", "/marks", "/filter", "/filterLastName", "/disciplines","/registration")
+                        "/students", "/marks", "/groups", "/filter", "/filterLastName", "/disciplines", "/registration")
                 .permitAll()
-                .antMatchers("/addDisciplineForm").hasRole("ADMIN")
-                //TODO РАЗОБРАТЬСЯ С CSS, ПОЧЕМУ НЕ ПУСКАЕТ РЕГУЛЯРКОЙ  В ДИРЕКТОРИЮ
-                //TODO ДОБАВИТЬ ПУТЬ К СТАТИК ДИРЕКТОРИИ В ПРОПЕРТИ
-                .antMatchers("/background.css", "/input.css", "/mainIndex.css", "/tables.css").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/accessDenied")
                 .and()
                 .logout().invalidateHttpSession(true)
                 .clearAuthentication(true)

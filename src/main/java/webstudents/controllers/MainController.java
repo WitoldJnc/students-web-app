@@ -21,4 +21,9 @@ public class MainController {
         return "logout";
     }
 
+    @GetMapping("/accessDenied")
+    public String accessDenied() {
+        return "accessDenied";
+    }
+
 }

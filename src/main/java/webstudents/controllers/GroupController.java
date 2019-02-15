@@ -3,6 +3,7 @@ package webstudents.controllers;
 import lombok.val;
 import org.apache.commons.collections4.SetUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,8 @@ public class GroupController {
     @Autowired
     private DisciplineRepo disciplineRepo;
 
+    private static final String ONLY_ADMIN_AND_MODER = "hasAuthority('ADMIN') or hasAuthority('MODER')";
+
     @GetMapping("/groups")
     public String showAll(Model model) {
         commonModelMapping(model);
@@ -43,6 +46,7 @@ public class GroupController {
         return "members";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @PostMapping("/addGroup")
     public String addGroup(@RequestParam Integer groupNumber, Model model,
                            @RequestParam(value = "disciplines", required = false) Discipline... discipline) {
@@ -59,12 +63,14 @@ public class GroupController {
         return "redirect:/groups";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @RequestMapping("/deleteGroup/{id}")
     public String deleteGroup(@PathVariable("id") int id) {
         schoolGroupRepo.deleteById(id);
         return "redirect:/groups";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @RequestMapping("editGroup/{id}")
     public String editGroupRender(@PathVariable("id") SchoolGroup schoolGroup, Model model) {
 
@@ -78,6 +84,7 @@ public class GroupController {
         return "groups";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @RequestMapping("editGroup/{id}/patch")
     public String editGroup(@PathVariable("id") SchoolGroup schoolGroup,
                             @RequestParam Integer groupNumber,

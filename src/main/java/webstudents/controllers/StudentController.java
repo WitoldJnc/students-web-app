@@ -2,6 +2,7 @@ package webstudents.controllers;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,8 @@ public class StudentController {
     @Autowired
     private SchoolGroupRepo schoolGroupRepo;
 
+    private static final String ONLY_ADMIN_AND_MODER = "hasAuthority('ADMIN') or hasAuthority('MODER')";
+
     @GetMapping("/students")
     public String index(Model model) {
         commonModelMapprin(model);
@@ -26,6 +29,7 @@ public class StudentController {
         return "students";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @PostMapping("/studentAdd")
     public String add(@RequestParam(value = "firstName") String firstName,
                       @RequestParam(value = "lastName") String lastName,
@@ -38,6 +42,7 @@ public class StudentController {
         return "redirect:/students";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
 
@@ -46,6 +51,7 @@ public class StudentController {
         return "redirect:/students";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @RequestMapping("/editStudent/{id}")
     public String editRender(@PathVariable("id") Student student, Model model) {
 
@@ -54,6 +60,7 @@ public class StudentController {
         return "students";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @RequestMapping("/editStudent/{id}/patch")
     public String edit(@PathVariable("id") Student student,
                        @RequestParam(value = "firstName") String firstName,

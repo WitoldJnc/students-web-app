@@ -1,6 +1,7 @@
 package webstudents.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,8 @@ public class MarkController {
     @Autowired
     private SchoolGroupRepo schoolGroupRepo;
 
+    private static final String ONLY_ADMIN_AND_MODER = "hasAuthority('ADMIN') or hasAuthority('MODER')";
+
     @GetMapping("/marks")
     public String findAllMarks(Model model) {
         commonModelMapping(model);
@@ -35,6 +38,7 @@ public class MarkController {
         return "marks";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @PostMapping("/addMarks")
     public String addMarks(@RequestParam(value = "students", required = false) Student student,
                            @RequestParam(value = "disciplines", required = false) Discipline discipline,
@@ -54,6 +58,8 @@ public class MarkController {
         return "marks";
     }
 
+
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @RequestMapping("/deleteMark/{id}")
     public String deleteMark(@PathVariable("id") int id) {
 
@@ -62,6 +68,7 @@ public class MarkController {
         return "redirect:/marks";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @RequestMapping("/editMark/{id}")
     public String editMarkRendeer(@PathVariable("id") Mark mark, Model model) {
 
@@ -71,6 +78,7 @@ public class MarkController {
         return "marks";
     }
 
+    @PreAuthorize(ONLY_ADMIN_AND_MODER)
     @RequestMapping("/editMark/{id}/patch")
     public String editMark(@PathVariable("id") Mark markmodel,
                            @RequestParam(value = "mark") Integer mark) {

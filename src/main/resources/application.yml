@@ -15,5 +15,5 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.xml
 
 handlebars:
-  prefix: /templates
+  prefix: /templates/
   suffix: .hbs
