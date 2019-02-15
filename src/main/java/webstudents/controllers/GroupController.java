@@ -53,7 +53,7 @@ public class GroupController {
         schoolGroup.setDisciplines(disciplines);
         schoolGroup.setGroupNumber(groupNumber);
 
-        model.addAttribute("groups", schoolGroupRepo.save(schoolGroup));
+        schoolGroupRepo.save(schoolGroup);
 
         commonModelMapping(model);
         return "redirect:/groups";

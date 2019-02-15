@@ -3,7 +3,15 @@
 {{#user}}
     <div>
         <form method="post" action="/editUser/{{#id}}{{id}}{{/id}}/patch">
-            {{> partials/editUserForm}}
+            {{> partials/addUserForm}}
+
+            <select name="role">
+                {{#edit-role}}
+                    <option {{#eq  userRole roles.userRole}}selected{{/eq}} value="{{id}}">
+                        {{userRole}}
+                    </option>
+                {{/edit-role}}
+            </select>
             <button type="submit">upd</button>
         </form>
     </div>

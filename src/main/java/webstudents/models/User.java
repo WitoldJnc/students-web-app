@@ -30,6 +30,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "roles")
     private Role roles;
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(getRoles());
@@ -55,4 +56,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

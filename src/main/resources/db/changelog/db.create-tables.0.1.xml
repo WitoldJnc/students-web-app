@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="Anton (generated)" id="1550071725977-1">
+    <changeSet author="Anton (generated)" id="1550210712677-1">
         <createTable tableName="disciplines">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -8,7 +8,7 @@
             <column name="discipline_name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-2">
+    <changeSet author="Anton (generated)" id="1550210712677-2">
         <createTable tableName="group_discipline">
             <column name="group_id" type="INT">
                 <constraints nullable="false"/>
@@ -18,7 +18,12 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-3">
+    <changeSet author="Anton (generated)" id="1550210712677-3">
+        <createTable tableName="hibernate_sequence">
+            <column name="next_val" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Anton (generated)" id="1550210712677-4">
         <createTable tableName="marks">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -28,7 +33,15 @@
             <column name="student_id" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-4">
+    <changeSet author="Anton (generated)" id="1550210712677-5">
+        <createTable tableName="roles">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="roles" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Anton (generated)" id="1550210712677-6">
         <createTable tableName="school_groups">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -36,7 +49,7 @@
             <column name="group_number" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-5">
+    <changeSet author="Anton (generated)" id="1550210712677-7">
         <createTable tableName="students">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -46,51 +59,60 @@
             <column name="group_id" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-6">
+    <changeSet author="Anton (generated)" id="1550210712677-8">
         <createTable tableName="users">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="password" type="VARCHAR(255)"/>
             <column name="username" type="VARCHAR(255)"/>
+            <column name="roles" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-7">
+    <changeSet author="Anton (generated)" id="1550210712677-9">
         <addPrimaryKey columnNames="group_id, discipline_id" constraintName="PRIMARY" tableName="group_discipline"/>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-8">
+    <changeSet author="Anton (generated)" id="1550210712677-10">
         <createIndex indexName="FK6o5buy4g7i65v20hjy9inwn05" tableName="marks">
             <column name="student_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-9">
+    <changeSet author="Anton (generated)" id="1550210712677-11">
         <createIndex indexName="FKeifq60ioebxndinvthi87fmb7" tableName="marks">
             <column name="discipline_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-10">
+    <changeSet author="Anton (generated)" id="1550210712677-12">
         <createIndex indexName="FKkcwrtb910ys1ms2chq7tlnjui" tableName="group_discipline">
             <column name="discipline_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-11">
+    <changeSet author="Anton (generated)" id="1550210712677-13">
         <createIndex indexName="FKmgr4l4d19cbpimmsmwqj6i6n5" tableName="students">
             <column name="group_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-12">
+    <changeSet author="Anton (generated)" id="1550210712677-14">
+        <createIndex indexName="FKox6cxr6k1kgtvremu39ca8qvu" tableName="users">
+            <column name="roles"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Anton (generated)" id="1550210712677-15">
         <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="group_discipline" constraintName="FK6eaohu7vy1cg1ay97hagte4aj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="school_groups"/>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-13">
+    <changeSet author="Anton (generated)" id="1550210712677-16">
         <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="marks" constraintName="FK6o5buy4g7i65v20hjy9inwn05" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="students"/>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-14">
+    <changeSet author="Anton (generated)" id="1550210712677-17">
         <addForeignKeyConstraint baseColumnNames="discipline_id" baseTableName="marks" constraintName="FKeifq60ioebxndinvthi87fmb7" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="disciplines"/>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-15">
+    <changeSet author="Anton (generated)" id="1550210712677-18">
         <addForeignKeyConstraint baseColumnNames="discipline_id" baseTableName="group_discipline" constraintName="FKkcwrtb910ys1ms2chq7tlnjui" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="disciplines"/>
     </changeSet>
-    <changeSet author="Anton (generated)" id="1550071725977-16">
+    <changeSet author="Anton (generated)" id="1550210712677-19">
         <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="students" constraintName="FKmgr4l4d19cbpimmsmwqj6i6n5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="school_groups"/>
+    </changeSet>
+    <changeSet author="Anton (generated)" id="1550210712677-20">
+        <addForeignKeyConstraint baseColumnNames="roles" baseTableName="users" constraintName="FKox6cxr6k1kgtvremu39ca8qvu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="roles"/>
     </changeSet>
 </databaseChangeLog>

@@ -14,6 +14,7 @@
     <include file="src/main/resources/db/changelog/db.insert-marks.0.1.sql"/>
     <include file="src/main/resources/db/changelog/db.insert-marks.0.2.sql"/>
     <include file="src/main/resources/db/changelog/db.insert-marks.0.3.sql"/>
+    <include file="src/main/resources/db/changelog/db.insert-roles.0.1.sql"/>
     <include file="src/main/resources/db/changelog/db.insert-users.0.1.sql"/>
 
 </databaseChangeLog>

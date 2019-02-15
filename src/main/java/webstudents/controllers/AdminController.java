@@ -23,7 +23,7 @@ public class AdminController {
     @Autowired
     private RoleRepo roleRepo;
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     public String userList(Model model) {
         commonModelMapprin(model);
 
@@ -34,7 +34,7 @@ public class AdminController {
     public String deleteUser(@PathVariable("id") int id) {
 
         userRepo.deleteById(id);
-        return "redirect:/user";
+        return "redirect:/users";
     }
 
     @RequestMapping("/editUser/{id}")
