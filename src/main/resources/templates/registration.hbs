@@ -1,12 +1,29 @@
 <html>
 <head>
-
 </head>
 <body>
-<form method="post" action="/registration">
-    {{> partials/addUserForm}}
-    <button type="submit">registration</button>
+{{> navbar}}
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="container">
+    <div align="center"><h1>REGISTRATION</h1></div>
+    <form action="/registration" method="post">
+        <div class="form-group">
+            <label for="userInput">Username</label>
+            <input class="form-control" id="userInput" type="text" name="username" placeholder="username"
+                   value="{{#username}}{{username}}{{/username}}">
+        </div>
+        <div class="form-group">
+            <label for="passInput">Password</label>
+            <input class="form-control" id="passInput" type="text" name="password" placeholder="password"
+                   value="{{#password}}{{password}}{{/password}}">
+            <small id="loginHelp" class="form-text text-muted">Никому не говорите свой пороль</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Registration</button>
 
-</form>
+    </form>
+</div>
 </body>
 </html>

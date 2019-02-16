@@ -5,49 +5,56 @@
     <link rel="stylesheet" href="/input.css"/>
 </head>
 <body>
-{{> index}}
-<div class="block-outer">
-    <div class="block-inner">
-        <div class="form-container">
-            {{#mark}}
-                <form method="post" action="/editMark/{{#id}}{{id}}{{/id}}/patch">
-                    {{> partials/addMarkForm}}
-                    <button class="submit" type="submit">upd mark</button>
-                </form>
-            {{/mark}}
-            {{^mark}}
-                <form method="post" action="/addMarks">
-                    {{> partials/addMarkForm}}
-                    <button class="submit" type="submit">add mark</button>
-                </form>
-            {{/mark}}
+{{> navbar}}
+<br/>
+<div>
+    {{#mark}}
+        <div class="container">
+            <form class="form-inline" role="form" method="post" action="/editMark/{{#id}}{{id}}{{/id}}/patch">
+              
+                {{> partials/editMarkForm}}
+                <button class="btn btn-primary mb-1" type="submit">upd mark</button>
+            </form>
         </div>
-        <div class="table-name">табель оценок</div>
-        <div>
-            <table>
-                <tr>
-                    <th>Номер группы</th>
-                    <th>Имя и фамилия</th>
-                    <th>Дисциплина</th>
-                    <th>Оценка</th>
-                    <th>delete</th>
-                    <th>edit</th>
-                </tr>
-                {{#marks}}
-                    <tr>
-                        <td>{{studentId.group.groupNumber}}</td>
-                        <td>{{studentId.firstName}} {{studentId.lastName}}</td>
-                        <td>{{#disciplineId.disciplineName}}{{.}}{{/disciplineId.disciplineName}}</td>
-                        <td>{{#mark}}{{.}}{{/mark}}</td>
-                        <td><a href="/deleteMark/{{id}}">delete</a></td>
-                        <td><a href="/editMark/{{id}}">edit</a></td>
-                    </tr>
-
-                {{/marks}}
-            </table>
-
+    {{/mark}}
+    {{^mark}}
+        <div class="container">
+            <form class="form-inline" role="form" method="post" action="/addMarks">
+                {{> partials/addMarkForm}}
+                <button class="btn btn-primary mb-1" type="submit">add mark</button>
+            </form>
         </div>
-    </div>
+    {{/mark}}
+</div>
+
+<div class="table-name" align="center"><h4>табель оценок</h4></div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-condensed">
+        <thead>
+        <tr class="active">
+            <th>Номер группы</th>
+            <th>Имя и фамилия</th>
+            <th>Дисциплина</th>
+            <th>Оценка</th>
+            <th>delete</th>
+            <th>edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#marks}}
+            <tr>
+                <td>{{studentId.group.groupNumber}}</td>
+                <td>{{studentId.firstName}} {{studentId.lastName}}</td>
+                <td>{{#disciplineId.disciplineName}}{{.}}{{/disciplineId.disciplineName}}</td>
+                <td>{{#mark}}{{.}}{{/mark}}</td>
+                <td><a href="/deleteMark/{{id}}">delete</a></td>
+                <td><a href="/editMark/{{id}}">edit</a></td>
+            </tr>
+
+        {{/marks}}
+        </tbody>
+    </table>
 </div>
 
 </body>

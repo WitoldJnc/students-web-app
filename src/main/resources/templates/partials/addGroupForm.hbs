@@ -1,10 +1,12 @@
 <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
-<input required type="text" name="groupNumber" placeholder="Номер группы"
-       value="{{#groupNumber}}{{groupNumber}}{{/groupNumber}}"
-       pattern="\d{1,9}" oninvalid="this.setCustomValidity('Только числа')">
+<div class="form-group mb-1 ">
+    <input class="form-control" required type="text" name="groupNumber" placeholder="Номер группы"
+           value="{{#groupNumber}}{{groupNumber}}{{/groupNumber}}"
+           pattern="\d{1,9}" oninvalid="this.setCustomValidity('Только числа')">
+</div>
 
-<div class="multiple-select">
-    <select name="disciplines" size="3" multiple>
+<div class="form-group mx-sm-1 mb-1">
+    <select name="disciplines" class="form-control" multiple>
         {{#notChosenDiscipline}}
             <option value="{{id}}">{{disciplineName}}</option>
         {{/notChosenDiscipline}}

@@ -30,7 +30,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "roles")
     private Role roles;
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(getRoles());

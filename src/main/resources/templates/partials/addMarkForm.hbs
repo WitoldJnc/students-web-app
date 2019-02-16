@@ -1,6 +1,6 @@
 {{#if selectedGroup}}
-    <div class="ddl-select">
-        <select name="students">
+    <div class="form-group mx-sm-1 mb-1">
+        <select name="students" class="form-control">
             {{#studentInGroup}}
                 <option value="{{id}}">
                     {{firstName}} {{lastName}}
@@ -8,8 +8,8 @@
             {{/studentInGroup}}
         </select>
     </div>
-    <div class="ddl-select">
-        <select name="disciplines">
+    <div class="form-group mx-sm-1 mb-1">
+        <select name="disciplines" class="form-control">
             {{#disciplines}}
                 <option value="{{id}}">
                     {{disciplineName}}
@@ -17,12 +17,14 @@
             {{/disciplines}}
         </select>
     </div>
-    <input required type="text" name="mark" placeholder="Оценка" value="{{#mark}}{{mark}}{{/mark}}"
-           pattern="^(?:[1-9]|0[1-9]|10)$" oninvalid="this.setCustomValidity('Только числа от 1 до 10')">
-
+    <div class="form-group mb-1 ">
+        <input class="form-control" required type="text" name="mark" placeholder="Оценка"
+               value="{{#mark}}{{mark}}{{/mark}}"
+               pattern="^(?:[1-9]|0[1-9]|10)$" oninvalid="this.setCustomValidity('Только числа от 1 до 10')">
+    </div>
 {{else}}
-    <div class="ddl-select">
-        <select name="groups">
+    <div class="form-group mx-sm-1 mb-1">
+        <select name="groups" class="form-control">
             {{#groups}}
                 <option {{#eq selectedGroup.id id}}selected{{/eq}} value="{{id}}">
                     {{groupNumber}}
@@ -32,5 +34,3 @@
     </div>
     <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
 {{/if}}
-
-{{> partials/editMarkForm}}

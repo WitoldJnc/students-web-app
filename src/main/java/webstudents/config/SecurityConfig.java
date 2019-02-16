@@ -34,22 +34,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**/*.css").permitAll()
-                .antMatchers(
-                        "/students", "/marks", "/groups", "/filter", "/filterLastName", "/disciplines", "/registration")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                    .antMatchers("/**/*.css").permitAll()
+                    .antMatchers(
+                        "/members","/students", "/marks", "/groups", "/filter", "/filterLastName", "/disciplines", "/registration")
+                        .permitAll()
+                    .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login").permitAll()
+                    .formLogin()
+                    .loginPage("/login").permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/accessDenied")
+                    .exceptionHandling().accessDeniedPage("/accessDenied")
                 .and()
-                .logout().invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").permitAll();
+                    .logout().invalidateHttpSession(true)
+                    .clearAuthentication(true)
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/").permitAll();
 
     }
 

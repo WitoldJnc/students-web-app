@@ -1,11 +1,15 @@
-<input required type="text" name="firstName" placeholder="Имя" value="{{#firstName}}{{firstName}}{{/firstName}}"
+<div class="form-group mb-1 ">
+<input class="form-control" required type="text" name="firstName" placeholder="Имя" value="{{#firstName}}{{firstName}}{{/firstName}}"
        pattern="^[а-яА-ЯёЁa-zA-Z]+$" {{> partials/defaultRequiredText}}>
-<input required type="text" name="lastName" placeholder="Фамилия" value="{{#lastName}}{{lastName}}{{/lastName}}"
+</div>
+<div class="form-group mx-sm-1 mb-1">
+<input class="form-control" required type="text" name="lastName" placeholder="Фамилия" value="{{#lastName}}{{lastName}}{{/lastName}}"
        pattern="^[а-яА-ЯёЁa-zA-Z]+$" {{> partials/defaultRequiredText}}>
+</div>
 <input type="hidden" name="id" value="{{#id}}{{id}}{{/id}}">
 
-<div class="ddl-select">
-    <select name="group">
+<div class="form-group mx-sm-1 mb-1">
+    <select name="group" class="form-control">
         {{#groups}}
             <option {{#eq groupNumber group.groupNumber}}selected{{/eq}} value="{{id}}">
                 {{groupNumber}}
