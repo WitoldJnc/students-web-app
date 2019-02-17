@@ -1,9 +1,12 @@
 <input type="hidden" name="id" value="{{#id}}{{id}}{{/id}}">
-<div class="form-group mb-1 ">
-<input class="form-control" required type="text" name="username" placeholder="username"
-       value="{{#username}}{{username}}{{/username}}">
+<div class="form-group">
+    <label for="userInput">Username</label>
+    <input required class="form-control" id="userInput" type="text" name="username" placeholder="username"
+           value="{{#username}}{{username}}{{/username}}">
 </div>
-<div class="form-group mb-1 ">
-<input class="form-control" required type="text" name="password" placeholder="password"
-       value="{{#password}}{{password}}{{/password}}">
+<div class="form-group">
+    <label for="passInput">Password</label>
+    <input required class="form-control" id="passInput" type="text" name="password" placeholder="password"
+           value="{{#password}}{{password}}{{/password}}">
+    <small id="loginHelp" class="form-text text-muted">Никому не говорите свой пороль</small>
 </div>

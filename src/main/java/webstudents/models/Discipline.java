@@ -23,17 +23,17 @@ public class Discipline {
 
     private String disciplineName;
 
-    @ManyToMany(mappedBy = "disciplines")
+    @ManyToMany(mappedBy = "disciplines", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private Set<SchoolGroup> schoolGroups;
 
     @JsonIgnore
     @OneToMany(targetEntity = Mark.class,
             mappedBy = "disciplineId", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.EAGER)
     private Set<Mark> markSet;
 
     public Discipline(String disciplineName) {
         this.disciplineName = disciplineName;
     }
-    
+
 }

@@ -1,77 +1,78 @@
 <html>
 <head>
-    <link rel="stylesheet" href="/background.css"/>
-    <link rel="stylesheet" href="/tables.css"/>
-    <link rel="stylesheet" href="/input.css"/>
 </head>
 <body>
 {{> navbar}}
-<br/>
+<div id="outer">
+    <div id="inner" class="container">
+        <div>
+            {{#student}}
+                <div class="container">
+                    <form class="form-inline" role="form" method="post"
+                          action="/editStudent/{{#id}}{{id}}{{/id}}/patch">
+                        {{> partials/addStudentForm}}
+                        <button class="btn btn-primary mb-1" type="submit">upd student</button>
+                    </form>
+                </div>
+            {{/student}}
+            {{^student}}
+                <div class="container">
+                    <form class="form-inline" role="form" method="post" action="studentAdd">
+                        {{> partials/addStudentForm}}
+                        <button class="btn btn-primary mb-1" type="submit">add student</button>
 
-<div>
-    {{#student}}
+                    </form>
+                </div>
+            {{/student}}
+        </div>
+
         <div class="container">
-            <form class="form-inline" role="form" method="post" action="/editStudent/{{#id}}{{id}}{{/id}}/patch">
-                {{> partials/addStudentForm}}
-                <button class="btn btn-primary mb-1" type="submit">upd student</button>
+            <form class="form-inline" role="form" method="post" action="filter">
+                <div class="form-group mb-1 ">
+                    <input class="form-control" type="text" name="filter" placeholder="Поиск по имени">
+                </div>
+                <button class="btn btn-secondary" type="submit">find</button>
             </form>
         </div>
-    {{/student}}
-    {{^student}}
         <div class="container">
-            <form class="form-inline" role="form" method="post" action="studentAdd">
-                {{> partials/addStudentForm}}
-                <button class="btn btn-primary mb-1" type="submit">add student</button>
-
+            <form class="form-inline" role="form" method="post" action="filterLastName">
+                <div class="form-group mb-1 ">
+                    <input class="form-control" type="text" name="filterLastName" placeholder="Поиск по фамилии">
+                </div>
+                <button class="btn btn-secondary" type="submit">find</button>
             </form>
         </div>
-    {{/student}}
-</div>
 
-<div class="container">
-    <form  class="form-inline" role="form" method="post" action="filter">
-        <div class="form-group mb-1 ">
-        <input class="form-control" type="text" name="filter" placeholder="Поиск по имени"   >
+        <div class="table-name" align="center"><h4>Список студентов</h4></div>
+
+
+        <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+                <thead>
+                <tr class="active">
+                    <th>id</th>
+                    <th>Имя</th>
+                    <th>Фамиия</th>
+                    <th>Номер группы</th>
+                    <th>delete</th>
+                    <th>edit</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#students}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{#firstName}}{{.}}{{/firstName}}</td>
+                        <td>{{#lastName}}{{.}}{{/lastName}}</td>
+                        <td>{{#group.groupNumber}}{{.}}{{/group.groupNumber}}</td>
+                        <td><a href="/delete/{{id}}">delete</a></td>
+                        <td><a href="/editStudent/{{id}}">edit</a></td>
+                    </tr>
+                {{/students}}
+                </tbody>
+            </table>
         </div>
-        <button class="btn btn-secondary" type="submit">find</button>
-    </form>
-</div>
-<div class="container">
-    <form  class="form-inline" role="form" method="post" action="filterLastName">
-        <div class="form-group mb-1 ">
-            <input class="form-control" type="text" name="filterLastName" placeholder="Поиск по фамилии"   >
-        </div>
-        <button class="btn btn-secondary" type="submit">find</button>
-    </form>
-</div>
-
-<div class="table-name" align="center"><h4>Список студентов</h4></div>
-
-<div class="table-responsive">
-    <table class="table table-hover table-condensed">
-        <thead>
-        <tr class="active">
-            <th>id</th>
-            <th>Имя</th>
-            <th>Фамиия</th>
-            <th>Номер группы</th>
-            <th>delete</th>
-            <th>edit</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#students}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{#firstName}}{{.}}{{/firstName}}</td>
-                <td>{{#lastName}}{{.}}{{/lastName}}</td>
-                <td>{{#group.groupNumber}}{{.}}{{/group.groupNumber}}</td>
-                <td><a href="/delete/{{id}}">delete</a></td>
-                <td><a href="/editStudent/{{id}}">edit</a></td>
-            </tr>
-        {{/students}}
-        </tbody>
-    </table>
+    </div>
 </div>
 
 </body>

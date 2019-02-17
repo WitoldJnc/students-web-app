@@ -29,7 +29,7 @@ public class SchoolGroup {
             fetch = FetchType.EAGER)
     private List<Student> students;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "group_discipline",
             joinColumns = {@JoinColumn(name = "group_id")},
             inverseJoinColumns = {@JoinColumn(name = "discipline_Id")})

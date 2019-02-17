@@ -6,7 +6,7 @@
 </div>
 
 <div class="form-group mx-sm-1 mb-1">
-    <select name="disciplines" class="form-control" multiple>
+    <select required name="disciplines" class="form-control" multiple>
         {{#notChosenDiscipline}}
             <option value="{{id}}">{{disciplineName}}</option>
         {{/notChosenDiscipline}}

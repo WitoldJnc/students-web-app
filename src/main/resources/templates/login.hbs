@@ -3,25 +3,18 @@
 </head>
 <body>
 {{> navbar}}
-<br/>
-<br/>
-<br/>
-<br/>
-<div class="container">
-    <div align="center"><h1>LOGIN</h1></div>
-        <form action="login" method="post">
-            <div class="form-group">
-                <label for="userInput">Username</label>
-                <input class="form-control" id="userInput" type="text" name="username" value="" placeholder="username">
-            </div>
-            <div class="form-group">
-                <label for="passInput">Password</label>
-                <input class="form-control" id="passInput" type="text" name="password" value="" placeholder="password">
-                <small id="loginHelp" class="form-text text-muted">Никому не говорите свой пороль</small>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-            <a href="/registration">create account</a>
-        </form>
+<div id="outer">
+    <div id="inner" class="container">
+        <div class="container">
+            <div align="center"><h1>LOGIN</h1></div>
+            <form action="login" method="post">
+                {{> partials/addUserForm}}
+                <button type="submit" class="btn btn-primary">LogIn</button>
+
+                <a href="/registration">create account</a>
+            </form>
+        </div>
     </div>
+</div>
 </body>
 </html>

@@ -4,52 +4,55 @@
 </head>
 <body>
 {{> navbar}}
-<br/>
-<div>
-    {{#user}}
-        <div class="container">
-            <form class="form-inline" role="form" method="post" action="/editUser/{{#id}}{{id}}{{/id}}/patch">
-                {{> partials/addUserForm}}
-                <div class="form-group mx-sm-1 mb-1">
-                    <select name="role" class="form-control">
-                        {{#edit-role}}
-                            <option {{#eq  userRole roles.userRole}}selected{{/eq}} value="{{id}}">
-                                {{userRole}}
-                            </option>
-                        {{/edit-role}}
-                    </select>
+<div id="outer">
+    <div id="inner" class="container">
+        <div>
+            {{#user}}
+                <div class="container">
+                    <form class="form-inline" role="form" method="post" action="/editUser/{{#id}}{{id}}{{/id}}/patch">
+                        {{> partials/addUserForm}}
+                        <div class="form-group mx-sm-1 mb-1">
+                            <select name="role" class="form-control">
+                                {{#edit-role}}
+                                    <option {{#eq  userRole roles.userRole}}selected{{/eq}} value="{{id}}">
+                                        {{userRole}}
+                                    </option>
+                                {{/edit-role}}
+                            </select>
+                        </div>
+                        <button class="btn btn-primary mb-1" type="submit">upd user</button>
+                    </form>
                 </div>
-                <button class="btn btn-primary mb-1" type="submit">upd user</button>
-            </form>
+            {{/user}}
         </div>
-    {{/user}}
-</div>
 
-<div class="table-name" align="center"><h4>Список пользователей</h4></div>
+        <div class="table-name" align="center"><h4>Список пользователей</h4></div>
 
-<div class="table-responsive">
-    <table class="table table-hover table-condensed">
-        <thead>
-        <tr class="active">
-            <th>id</th>
-            <th>Логин</th>
-            <th>Роль</th>
-            <th>delete</th>
-            <th>edit</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#users}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{username}}</td>
-                <td>{{roles.userRole}}</td>
-                <td><a href="/deleteUser/{{id}}">delete</a></td>
-                <td><a href="/editUser/{{id}}">edit</a></td>
-            </tr>
-        {{/users}}
-        </tbody>
-    </table>
+        <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+                <thead>
+                <tr class="active">
+                    <th>id</th>
+                    <th>Логин</th>
+                    <th>Роль</th>
+                    <th>delete</th>
+                    <th>edit</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#users}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{username}}</td>
+                        <td>{{roles.userRole}}</td>
+                        <td><a href="/deleteUser/{{id}}">delete</a></td>
+                        <td><a href="/editUser/{{id}}">edit</a></td>
+                    </tr>
+                {{/users}}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>
