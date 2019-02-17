@@ -6,3 +6,21 @@
 .table-responsive {
 	padding-top: 2%;
 }
+
+tbody {
+    display:block;
+    height:850px;
+    overflow:auto;
+    display:block;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+thead {
+    width: calc(  - 1em );
+}
+
+
+

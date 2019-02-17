@@ -6,50 +6,49 @@
 </head>
 <body>
 {{> navbar}}
-<div id="outer">
-    <div id="inner" class="container">
-        {{#disciplineForEdit}}
-            <div class="container">
-                <form class="form-inline" role="form" method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
-                    {{> partials/addDisciplineForm}}
 
-                    <button class="btn btn-primary mb-1" type="submit">upd discipline</button>
-                </form>
-            </div>
-        {{/disciplineForEdit}}
-        {{^disciplineForEdit}}
-            <div class="container">
-                <form class="form-inline" role="form" method="post" action="/addDiscipline">
-                    {{> partials/addDisciplineForm}}
+<div id="inner" class="container">
+    {{#disciplineForEdit}}
+        <div class="container">
+            <form class="form-inline" role="form" method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
+                {{> partials/addDisciplineForm}}
 
-                    <button class="btn btn-primary mb-1" type="submit">add discipline</button>
-                </form>
-            </div>
-        {{/disciplineForEdit}}
-        <div class="table-name" align="center"><h4>Список дисциплин</h4></div>
-
-        <div class="table-responsive">
-            <table class="table table-hover table-condensed">
-                <thead>
-                <tr class="active">
-                    <th>id</th>
-                    <th>название дисциплины</th>
-                    <th>delete</th>
-                    <th>edit</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#disciplines}}
-                    <tr>
-                        <td>{{id}}</td>
-                        <td>{{#disciplineName}}{{.}}{{/disciplineName}}</td>
-                        <td><a href="/deleteDiscipline/{{id}}">delete</a></td>
-                        <td><a href="/editDiscipline/{{id}}">edit</a></td>
-                    </tr>
-                {{/disciplines}}
-            </table>
-            </tbody>
+                <button class="btn btn-primary mb-1" type="submit">upd discipline</button>
+            </form>
         </div>
+    {{/disciplineForEdit}}
+    {{^disciplineForEdit}}
+        <div class="container">
+            <form class="form-inline" role="form" method="post" action="/addDiscipline">
+                {{> partials/addDisciplineForm}}
+
+                <button class="btn btn-primary mb-1" type="submit">add discipline</button>
+            </form>
+        </div>
+    {{/disciplineForEdit}}
+    <div class="table-name" align="center"><h4>Список предметов</h4></div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr class="active">
+                <th>id</th>
+                <th>Название предмета</th>
+                <th>delete</th>
+                <th>edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#disciplines}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{#disciplineName}}{{.}}{{/disciplineName}}</td>
+                    <td><a href="/deleteDiscipline/{{id}}">delete</a></td>
+                    <td><a href="/editDiscipline/{{id}}">edit</a></td>
+                </tr>
+            {{/disciplines}}
+        </table>
+        </tbody>
     </div>
 </div>
 

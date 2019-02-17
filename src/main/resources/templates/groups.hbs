@@ -6,49 +6,48 @@
 </head>
 <body>
 {{> navbar}}
-<div id="outer">
-    <div id="inner" class="container">
-        <div>
-            {{#editingGroup}}
-                <div class="container">
-                    <form class="form-inline" role="form" method="post" action="/editGroup/{{#id}}{{id}}{{/id}}/patch">
-                        {{> partials/addGroupForm}}
-                        <button class="btn btn-primary mb-1" type="submit">upd group</button>
-                    </form>
-                </div>
-            {{/editingGroup}}
-            {{^editingGroup}}
-                <div class="container">
-                    <form class="form-inline" role="form" method="post" action="/addGroup">
-                        {{> partials/addGroupForm}}
-                        <button class="btn btn-primary mb-1" type="submit">add group</button>
-                    </form>
-                </div>
-            {{/editingGroup}}
-        </div>
-        <div class="table-name" align="center"><h4>Список групп</h4></div>
 
-        <div class="table-responsive">
-            <table class="table table-hover table-condensed">
-                <thead>
-                <tr class="active">
-                    <th>номер группы</th>
-                    <th>delete</th>
-                    <th>edit</th>
+<div id="inner" class="container">
+    <div>
+        {{#editingGroup}}
+            <div class="container">
+                <form class="form-inline" role="form" method="post" action="/editGroup/{{#id}}{{id}}{{/id}}/patch">
+                    {{> partials/addGroupForm}}
+                    <button class="btn btn-primary mb-1" type="submit">upd group</button>
+                </form>
+            </div>
+        {{/editingGroup}}
+        {{^editingGroup}}
+            <div class="container">
+                <form class="form-inline" role="form" method="post" action="/addGroup">
+                    {{> partials/addGroupForm}}
+                    <button class="btn btn-primary mb-1" type="submit">add group</button>
+                </form>
+            </div>
+        {{/editingGroup}}
+    </div>
+    <div class="table-name" align="center"><h4>Список групп</h4></div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr class="active">
+                <th>Номер группы</th>
+                <th>delete</th>
+                <th>edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each groups}}
+                <tr>
+                    <td><a href="/members/{{id}}">{{groupNumber}}</a></td>
+                    <td><a href="/deleteGroup/{{id}}">delete</a></td>
+                    <td><a href="/editGroup/{{id}}">edit</a></td>
                 </tr>
-                </thead>
-                <tbody>
-                {{#each groups}}
-                    <tr>
-                        <td><a href="/members/{{id}}">{{groupNumber}}</a></td>
-                        <td><a href="/deleteGroup/{{id}}">delete</a></td>
-                        <td><a href="/editGroup/{{id}}">edit</a></td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
+            {{/each}}
+            </tbody>
+        </table>
 
-        </div>
     </div>
 </div>
 

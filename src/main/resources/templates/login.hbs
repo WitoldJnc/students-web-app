@@ -3,18 +3,18 @@
 </head>
 <body>
 {{> navbar}}
-<div id="outer">
-    <div id="inner" class="container">
-        <div class="container">
-            <div align="center"><h1>LOGIN</h1></div>
-            <form action="login" method="post">
-                {{> partials/addUserForm}}
-                <button type="submit" class="btn btn-primary">LogIn</button>
 
-                <a href="/registration">create account</a>
-            </form>
-        </div>
+<div id="inner" class="container">
+    <div class="container">
+        <div align="center"><h1>LOGIN</h1></div>
+        <form action="login" method="post">
+            {{> partials/addUserForm}}
+            <button type="submit" class="btn btn-primary">LogIn</button>
+
+            <a href="/registration">create account</a>
+        </form>
     </div>
 </div>
+
 </body>
 </html>
