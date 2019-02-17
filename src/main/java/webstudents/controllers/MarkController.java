@@ -13,9 +13,10 @@ import webstudents.repo.DisciplineRepo;
 import webstudents.repo.MarkRepo;
 import webstudents.repo.SchoolGroupRepo;
 import webstudents.repo.StudentRepo;
+import webstudents.service.RoleAndUsername;
 
 @Controller
-public class MarkController {
+public class MarkController extends RoleAndUsername {
 
     @Autowired
     private MarkRepo markRepo;
@@ -34,7 +35,6 @@ public class MarkController {
     @GetMapping("/marks")
     public String findAllMarks(Model model) {
         commonModelMapping(model);
-
         return "marks";
     }
 
@@ -93,5 +93,9 @@ public class MarkController {
         model.addAttribute("marks", markRepo.findAll());
         model.addAttribute("groups", schoolGroupRepo.findAll());
         model.addAttribute("disciplines", disciplineRepo.findAll());
+
+        isAdminOrModer(model);
+        isAdmin(model);
+        getUsername(model);
     }
 }

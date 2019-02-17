@@ -22,7 +22,7 @@ public class Mark {
     @JoinColumn(name = "discipline_id")
     private Discipline disciplineId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     private Student studentId;
 

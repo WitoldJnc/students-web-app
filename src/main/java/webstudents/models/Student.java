@@ -28,8 +28,8 @@ public class Student {
 
     @JsonIgnore
     @OneToMany(targetEntity = Mark.class,
-            mappedBy = "studentId", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+            mappedBy = "studentId", cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER)
     private Set<Mark> markSet;
 
     public Student(String firstName, String lastName, SchoolGroup group) {

@@ -9,8 +9,14 @@
         <div align="center"><h1>LOGIN</h1></div>
         <form action="login" method="post">
             {{> partials/addUserForm}}
-            <button type="submit" class="btn btn-primary">LogIn</button>
 
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="remember"
+                       name="remember-me" >
+                <label class="form-check-label" for="remember">Remember me</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">LogIn</button>
             <a href="/registration">create account</a>
         </form>
     </div>

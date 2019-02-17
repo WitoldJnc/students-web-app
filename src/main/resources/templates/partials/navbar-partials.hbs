@@ -12,15 +12,16 @@
 
     <div class="btn-group dropleft">
         <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Меню
+           {{username}}
         </button>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="/login">Войти</a>
             <a class="dropdown-item" href="/registration">Регистрация</a>
             <a class="dropdown-item" href="/logout">Выйти</a>
-
             <a class="dropdown-item" href="/">На главную</a>
+            {{#if isAdmin}}
             <a class="dropdown-item" href="/users">Cписок пользователей</a>
+            {{/if}}
         </div>
     </div>
 

@@ -9,24 +9,27 @@
 
 <div id="inner" class="container">
     <div id="forms">
-        {{#disciplineForEdit}}
-            <div class="container">
-                <form class="form-inline" role="form" method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
-                    {{> partials/addDisciplineForm}}
+        {{#if isAdminOrModer}}
+            {{#disciplineForEdit}}
+                <div class="container">
+                    <form class="form-inline" role="form" method="post"
+                          action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
+                        {{> partials/addDisciplineForm}}
 
-                    <button class="btn btn-secondary mb-1" type="submit">upd discipline</button>
-                </form>
-            </div>
-        {{/disciplineForEdit}}
-        {{^disciplineForEdit}}
-            <div class="container">
-                <form class="form-inline" role="form" method="post" action="/addDiscipline">
-                    {{> partials/addDisciplineForm}}
+                        <button class="btn btn-secondary mb-1" type="submit">upd discipline</button>
+                    </form>
+                </div>
+            {{/disciplineForEdit}}
+            {{^disciplineForEdit}}
+                <div class="container">
+                    <form class="form-inline" role="form" method="post" action="/addDiscipline">
+                        {{> partials/addDisciplineForm}}
 
-                    <button class="btn btn-secondary mb-1" type="submit">add discipline</button>
-                </form>
-            </div>
-        {{/disciplineForEdit}}
+                        <button class="btn btn-secondary mb-1" type="submit">add discipline</button>
+                    </form>
+                </div>
+            {{/disciplineForEdit}}
+        {{/if}}
     </div>
     <div class="table-name" align="center"><h4>Список предметов</h4></div>
 
@@ -36,8 +39,10 @@
             <tr class="active">
                 <th>id</th>
                 <th>Название предмета</th>
-                <th>delete</th>
-                <th>edit</th>
+                {{#if isAdminOrModer}}
+                    <th>delete</th>
+                    <th>edit</th>
+                {{/if}}
             </tr>
             </thead>
             <tbody>
@@ -45,9 +50,11 @@
                 <tr>
                     <td>{{id}}</td>
                     <td>{{#disciplineName}}{{.}}{{/disciplineName}}</td>
-                    <td><a href="/deleteDiscipline/{{id}}">delete</a></td>
-                    <td><a href="/editDiscipline/{{id}}">edit</a></td>
-                </tr>
+                {{#if isAdminOrModer}}
+                        <td><a href="/deleteDiscipline/{{id}}">delete</a></td>
+                        <td><a href="/editDiscipline/{{id}}">edit</a></td>
+                    </tr>
+                {{/if}}
             {{/disciplines}}
             </tbody>
         </table>

@@ -12,10 +12,11 @@ import webstudents.models.Role;
 import webstudents.models.User;
 import webstudents.repo.RoleRepo;
 import webstudents.repo.UserRepo;
+import webstudents.service.RoleAndUsername;
 
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
-public class AdminController {
+public class AdminController extends RoleAndUsername {
 
     @Autowired
     private UserRepo userRepo;
@@ -26,7 +27,6 @@ public class AdminController {
     @GetMapping("/users")
     public String userList(Model model) {
         commonModelMapprin(model);
-
         return "userList";
     }
 
@@ -61,6 +61,8 @@ public class AdminController {
     private void commonModelMapprin(Model model) {
         model.addAttribute("users", userRepo.findAll());
         model.addAttribute("edit-role", roleRepo.findAll());
+        isAdmin(model);
+        getUsername(model);
     }
 
 }

@@ -10,9 +10,10 @@ import webstudents.models.SchoolGroup;
 import webstudents.models.Student;
 import webstudents.repo.SchoolGroupRepo;
 import webstudents.repo.StudentRepo;
+import webstudents.service.RoleAndUsername;
 
 @Controller
-public class StudentController {
+public class StudentController extends RoleAndUsername {
 
     @Autowired
     private StudentRepo studentRepo;
@@ -25,7 +26,6 @@ public class StudentController {
     @GetMapping("/students")
     public String index(Model model) {
         commonModelMapprin(model);
-
         return "students";
     }
 
@@ -101,6 +101,9 @@ public class StudentController {
     private void commonModelMapprin(Model model) {
         model.addAttribute("students", studentRepo.findAll());
         model.addAttribute("groups", schoolGroupRepo.findAll());
+        isAdminOrModer(model);
+        isAdmin(model);
+        getUsername(model);
     }
 
 }

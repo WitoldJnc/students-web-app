@@ -7,9 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import webstudents.models.Discipline;
 import webstudents.repo.DisciplineRepo;
+import webstudents.service.RoleAndUsername;
 
 @Controller
-public class DisciplineController {
+public class DisciplineController extends RoleAndUsername {
 
     @Autowired
     private DisciplineRepo disciplineRepo;
@@ -63,6 +64,10 @@ public class DisciplineController {
 
     private void commonModelMapping(Model model) {
         model.addAttribute("disciplines", disciplineRepo.findAll());
+        isAdminOrModer(model);
+        isAdmin(model);
+        getUsername(model);
+
     }
 }
 

@@ -9,23 +9,25 @@
 
 <div id="inner" class="container">
     <div id="forms">
-        {{#mark}}
-            <div class="container">
-                <form class="form-inline" role="form" method="post" action="/editMark/{{#id}}{{id}}{{/id}}/patch">
+        {{#if isAdminOrModer}}
+            {{#mark}}
+                <div class="container">
+                    <form class="form-inline" role="form" method="post" action="/editMark/{{#id}}{{id}}{{/id}}/patch">
 
-                    {{> partials/editMarkForm}}
-                    <button class="btn btn-secondary mb-1" type="submit">upd mark</button>
-                </form>
-            </div>
-        {{/mark}}
-        {{^mark}}
-            <div class="container">
-                <form class="form-inline" role="form" method="post" action="/addMarks">
-                    {{> partials/addMarkForm}}
-                    <button class="btn btn-secondary mb-1" type="submit">add mark</button>
-                </form>
-            </div>
-        {{/mark}}
+                        {{> partials/editMarkForm}}
+                        <button class="btn btn-secondary mb-1" type="submit">upd mark</button>
+                    </form>
+                </div>
+            {{/mark}}
+            {{^mark}}
+                <div class="container">
+                    <form class="form-inline" role="form" method="post" action="/addMarks">
+                        {{> partials/addMarkForm}}
+                        <button class="btn btn-secondary mb-1" type="submit">add mark</button>
+                    </form>
+                </div>
+            {{/mark}}
+        {{/if}}
     </div>
 
     <div class="table-name" align="center"><h4>Табель оценок</h4></div>
@@ -38,8 +40,10 @@
                 <th>Имя и фамилия</th>
                 <th>Предмет</th>
                 <th>Оценка</th>
-                <th>delete</th>
-                <th>edit</th>
+                {{#if isAdminOrModer}}
+                    <th>delete</th>
+                    <th>edit</th>
+                {{/if}}
             </tr>
             </thead>
             <tbody>
@@ -49,8 +53,10 @@
                     <td>{{studentId.firstName}} {{studentId.lastName}}</td>
                     <td>{{#disciplineId.disciplineName}}{{.}}{{/disciplineId.disciplineName}}</td>
                     <td>{{#mark}}{{.}}{{/mark}}</td>
-                    <td><a href="/deleteMark/{{id}}">delete</a></td>
-                    <td><a href="/editMark/{{id}}">edit</a></td>
+                    {{#if isAdminOrModer}}
+                        <td><a href="/deleteMark/{{id}}">delete</a></td>
+                        <td><a href="/editMark/{{id}}">edit</a></td>
+                    {{/if}}
                 </tr>
             {{/marks}}
             </tbody>

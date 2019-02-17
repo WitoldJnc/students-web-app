@@ -12,13 +12,14 @@ import webstudents.models.SchoolGroup;
 import webstudents.repo.DisciplineRepo;
 import webstudents.repo.SchoolGroupRepo;
 import webstudents.repo.StudentRepo;
+import webstudents.service.RoleAndUsername;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 @Controller
-public class GroupController {
+public class GroupController extends RoleAndUsername {
 
     @Autowired
     private SchoolGroupRepo schoolGroupRepo;
@@ -33,6 +34,7 @@ public class GroupController {
 
     @GetMapping("/groups")
     public String showAll(Model model) {
+
         commonModelMapping(model);
         model.addAttribute("notChosenDiscipline", disciplineRepo.findAll());
         return "groups";
@@ -103,6 +105,9 @@ public class GroupController {
         model.addAttribute("groups", schoolGroupRepo.findAll());
         model.addAttribute("allDisciplines", disciplineRepo.findAll());
         model.addAttribute("disciplines", disciplineRepo.findAll());
+        isAdminOrModer(model);
+        isAdmin(model);
+        getUsername(model);
     }
 }
 

@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import webstudents.models.User;
 import webstudents.repo.RoleRepo;
 import webstudents.repo.UserRepo;
+import webstudents.service.RoleAndUsername;
 
 import java.util.Optional;
 
 @Controller
-public class UserController {
+public class UserController extends RoleAndUsername {
 
     @Autowired
     private UserRepo userRepo;
@@ -26,7 +27,8 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/registration")
-    public String registration() {
+    public String registration(Model model) {
+        commonModelMapping(model);
         return "registration";
     }
 
@@ -34,6 +36,7 @@ public class UserController {
     public String addUser(@RequestParam(value = "username") String username,
                           @RequestParam(value = "password") String password,
                           User user, Model model) {
+        commonModelMapping(model);
         Optional<User> userFromDb = Optional.ofNullable(userRepo.findByUsername(user.getUsername()));
 
         if (userFromDb.isPresent()) {
@@ -47,5 +50,13 @@ public class UserController {
         userRepo.save(user);
 
         return "redirect:/login";
+    }
+
+    private void commonModelMapping(Model model) {
+
+        isAdminOrModer(model);
+        isAdmin(model);
+        getUsername(model);
+
     }
 }
