@@ -1,5 +1,15 @@
 language: java
 jdk:
   - oraclejdk8
-  - oraclejdk9
-  - openjdk8
+
+install: true
+
+script:
+  - ./gradlew build --scan -s
+
+notifications:
+  email:
+    recipients:
+      - witold.jnc@gmail.com
+    on_success: always
+    on_failure: always
