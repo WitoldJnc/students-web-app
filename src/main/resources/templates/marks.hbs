@@ -8,13 +8,13 @@
 {{> navbar}}
 
 <div id="inner" class="container">
-    <div>
+    <div id="forms">
         {{#mark}}
             <div class="container">
                 <form class="form-inline" role="form" method="post" action="/editMark/{{#id}}{{id}}{{/id}}/patch">
 
                     {{> partials/editMarkForm}}
-                    <button class="btn btn-primary mb-1" type="submit">upd mark</button>
+                    <button class="btn btn-secondary mb-1" type="submit">upd mark</button>
                 </form>
             </div>
         {{/mark}}
@@ -22,7 +22,7 @@
             <div class="container">
                 <form class="form-inline" role="form" method="post" action="/addMarks">
                     {{> partials/addMarkForm}}
-                    <button class="btn btn-primary mb-1" type="submit">add mark</button>
+                    <button class="btn btn-secondary mb-1" type="submit">add mark</button>
                 </form>
             </div>
         {{/mark}}

@@ -49,11 +49,9 @@ public class AdminController {
     @RequestMapping("/editUser/{id}/patch")
     public String edit(@PathVariable("id") User user,
                        @RequestParam(value = "username") String username,
-                       @RequestParam(value = "password") String password,
                        @RequestParam(value = "role") Role role) {
 
         user.setUsername(username);
-        user.setPassword(password);
         user.setRoles(role);
         userRepo.save(user);
 

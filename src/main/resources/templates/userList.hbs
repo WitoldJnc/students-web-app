@@ -6,11 +6,17 @@
 {{> navbar}}
 
 <div id="inner" class="container">
-    <div>
+    <div id="forms">
         {{#user}}
             <div class="container">
                 <form class="form-inline" role="form" method="post" action="/editUser/{{#id}}{{id}}{{/id}}/patch">
-                    {{> partials/addUserForm}}
+
+                    <div class="form-group">
+                        <label for="userInput">Username</label>
+                        <input required class="form-control" id="userInput" type="text" name="username"
+                               placeholder="username"
+                               value="{{#username}}{{username}}{{/username}}">
+                    </div>
                     <div class="form-group mx-sm-1 mb-1">
                         <select name="role" class="form-control">
                             {{#edit-role}}
@@ -20,7 +26,7 @@
                             {{/edit-role}}
                         </select>
                     </div>
-                    <button class="btn btn-primary mb-1" type="submit">upd user</button>
+                    <button class="btn btn-secondary mb-1" type="submit">upd user</button>
                 </form>
             </div>
         {{/user}}

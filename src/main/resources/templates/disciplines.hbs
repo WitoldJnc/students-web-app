@@ -8,24 +8,26 @@
 {{> navbar}}
 
 <div id="inner" class="container">
-    {{#disciplineForEdit}}
-        <div class="container">
-            <form class="form-inline" role="form" method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
-                {{> partials/addDisciplineForm}}
+    <div id="forms">
+        {{#disciplineForEdit}}
+            <div class="container">
+                <form class="form-inline" role="form" method="post" action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
+                    {{> partials/addDisciplineForm}}
 
-                <button class="btn btn-primary mb-1" type="submit">upd discipline</button>
-            </form>
-        </div>
-    {{/disciplineForEdit}}
-    {{^disciplineForEdit}}
-        <div class="container">
-            <form class="form-inline" role="form" method="post" action="/addDiscipline">
-                {{> partials/addDisciplineForm}}
+                    <button class="btn btn-secondary mb-1" type="submit">upd discipline</button>
+                </form>
+            </div>
+        {{/disciplineForEdit}}
+        {{^disciplineForEdit}}
+            <div class="container">
+                <form class="form-inline" role="form" method="post" action="/addDiscipline">
+                    {{> partials/addDisciplineForm}}
 
-                <button class="btn btn-primary mb-1" type="submit">add discipline</button>
-            </form>
-        </div>
-    {{/disciplineForEdit}}
+                    <button class="btn btn-secondary mb-1" type="submit">add discipline</button>
+                </form>
+            </div>
+        {{/disciplineForEdit}}
+    </div>
     <div class="table-name" align="center"><h4>Список предметов</h4></div>
 
     <div class="table-responsive">
@@ -47,8 +49,9 @@
                     <td><a href="/editDiscipline/{{id}}">edit</a></td>
                 </tr>
             {{/disciplines}}
+            </tbody>
         </table>
-        </tbody>
+
     </div>
 </div>
 

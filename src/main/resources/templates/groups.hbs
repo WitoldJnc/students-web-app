@@ -8,12 +8,12 @@
 {{> navbar}}
 
 <div id="inner" class="container">
-    <div>
+    <div id="forms">
         {{#editingGroup}}
             <div class="container">
                 <form class="form-inline" role="form" method="post" action="/editGroup/{{#id}}{{id}}{{/id}}/patch">
                     {{> partials/addGroupForm}}
-                    <button class="btn btn-primary mb-1" type="submit">upd group</button>
+                    <button class="btn btn-secondary mb-1" type="submit">upd group</button>
                 </form>
             </div>
         {{/editingGroup}}
@@ -21,7 +21,7 @@
             <div class="container">
                 <form class="form-inline" role="form" method="post" action="/addGroup">
                     {{> partials/addGroupForm}}
-                    <button class="btn btn-primary mb-1" type="submit">add group</button>
+                    <button class="btn btn-secondary mb-1" type="submit">add group</button>
                 </form>
             </div>
         {{/editingGroup}}
