@@ -22,7 +22,7 @@ public class Mark {
     @JoinColumn(name = "discipline_id")
     private Discipline disciplineId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST,})
     @JoinColumn(name = "student_id")
     private Student studentId;
 

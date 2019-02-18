@@ -25,11 +25,10 @@ public class SchoolGroup {
 
     @JsonIgnore
     @OneToMany(targetEntity = Student.class,
-            mappedBy = "group", cascade = CascadeType.REFRESH,
-            fetch = FetchType.EAGER)
+            mappedBy = "group", fetch = FetchType.EAGER)
     private List<Student> students;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "group_discipline",
             joinColumns = {@JoinColumn(name = "group_id")},
             inverseJoinColumns = {@JoinColumn(name = "discipline_Id")})

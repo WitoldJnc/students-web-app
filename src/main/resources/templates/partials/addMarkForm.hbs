@@ -19,9 +19,9 @@
     </div>
     <div class="form-group mb-1 ">
         <input class="form-control" required type="text" name="mark"
-               placeholder="{{message "button.mark"}}" value="{{#mark}}{{mark}}{{/mark}}"
-               pattern="^(?:[1-9]|0[1-9]|10)$" oninvalid="this.setCustomValidity('{{message
-                "system.onlyNumbersUpToTen"}}')">
+               placeholder="{{message "table.mark"}}" value="{{#mark}}{{mark}}{{/mark}}"
+               pattern="^(?:[1-9]|0[1-9]|10)$"
+               oninvalid="this.setCustomValidity('{{message "system.onlyNumbersUpToTen"}}')">
     </div>
 {{else}}
     <div class="form-group mx-sm-1 mb-1">

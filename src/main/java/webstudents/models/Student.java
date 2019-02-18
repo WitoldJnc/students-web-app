@@ -22,14 +22,13 @@ public class Student {
     private String firstName;
     private String lastName;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
     private SchoolGroup group;
 
     @JsonIgnore
     @OneToMany(targetEntity = Mark.class,
-            mappedBy = "studentId", cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER)
+            mappedBy = "studentId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Mark> markSet;
 
     public Student(String firstName, String lastName, SchoolGroup group) {
