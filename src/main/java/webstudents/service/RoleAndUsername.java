@@ -11,13 +11,15 @@ public class RoleAndUsername {
                 .getAuthentication()
                 .getAuthorities()
                 .stream()
-                    .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN"));
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN"));
         model.addAttribute("isAdmin", admin);
     }
 
     protected void getUsername(Model model) {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("username", name);
+
+        model.addAttribute("user-login", name.equals("anonymousUser") ? "anonymous" : name);
+
     }
 
     protected void isAdminOrModer(Model model) {
@@ -26,8 +28,8 @@ public class RoleAndUsername {
                 .getAuthentication()
                 .getAuthorities()
                 .stream()
-                    .allMatch(grantedAuthority ->
-                                (grantedAuthority.getAuthority().equals("ADMIN")
+                .allMatch(grantedAuthority ->
+                        (grantedAuthority.getAuthority().equals("ADMIN")
                                 ||
                                 (grantedAuthority.getAuthority().equals("MODER"))));
 

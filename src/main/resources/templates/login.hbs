@@ -9,17 +9,17 @@
         <div align="center"><h1>LOGIN</h1></div>
         <form action="login" method="post">
             {{> partials/addUserForm}}
-
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="remember"
                        name="remember-me" >
-                <label class="form-check-label" for="remember">Remember me</label>
+                <label class="form-check-label" for="remember">{{message "system.rememberMe"}}</label>
             </div>
 
-            <button type="submit" class="btn btn-primary">LogIn</button>
-            <a href="/registration">create account</a>
+            <button type="submit" class="btn btn-primary">{{message "navbar.login"}}</button>
+            <a href="/registration">{{message "system.createAccount"}}</a>
         </form>
     </div>
+
 </div>
 
 </body>

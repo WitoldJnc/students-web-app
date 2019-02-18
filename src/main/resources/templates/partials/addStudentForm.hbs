@@ -1,10 +1,12 @@
 <div class="form-group mb-1 ">
-<input class="form-control" required type="text" name="firstName" placeholder="Имя" value="{{#firstName}}{{firstName}}{{/firstName}}"
-       pattern="^[а-яА-ЯёЁa-zA-Z]+$" {{> partials/defaultRequiredText}}>
+    <input class="form-control" required type="text" name="firstName"
+           placeholder="{{message "placeholder.firstName"}}" value="{{#firstName}}{{firstName}}{{/firstName}}"
+           pattern="^[а-яА-ЯёЁa-zA-Z]+$" {{> partials/defaultRequiredText}}>
 </div>
 <div class="form-group mx-sm-1 mb-1">
-<input class="form-control" required type="text" name="lastName" placeholder="Фамилия" value="{{#lastName}}{{lastName}}{{/lastName}}"
-       pattern="^[а-яА-ЯёЁa-zA-Z]+$" {{> partials/defaultRequiredText}}>
+    <input class="form-control" required type="text" name="lastName"
+           placeholder="{{message "placeholder.lastName"}}" value="{{#lastName}}{{lastName}}{{/lastName}}"
+           pattern="^[а-яА-ЯёЁa-zA-Z]+$" {{> partials/defaultRequiredText}}>
 </div>
 <input type="hidden" name="id" value="{{#id}}{{id}}{{/id}}">
 

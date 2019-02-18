@@ -1,30 +1,36 @@
 <div class="container">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="/students">Студенты </a></li>
-            <li class="nav-item"><a class="nav-link" href="/groups">Группы </a></li>
-            <li class="nav-item"><a class="nav-link" href="/disciplines">Предметы </a></li>
-            <li class="nav-item"><a class="nav-link" href="/marks">Оценки </a></li>
+            <li class="nav-item"><a class="nav-link" href="/students">{{message "navbar.students"}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="/groups">{{message "navbar.groups"}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="/disciplines">{{message "navbar.disciplines"}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="/marks">{{message "navbar.marks"}}</a></li>
         </ul>
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="?lang=ru" class="btn btn-secondary btn-xs active" role="button" aria-pressed="true">RUS</a>
+            <a href="?lang=en" class="btn btn-secondary btn-xs active" role="button" aria-pressed="true">EN</a>
+        </div>
     </div>
 </div>
-<ul class="nav navbar-nav navbar-right">
+<div class="nav navbar-nav navbar-right">
 
     <div class="btn-group dropleft">
         <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           {{username}}
+            {{user-login}}
         </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="/login">Войти</a>
-            <a class="dropdown-item" href="/registration">Регистрация</a>
-            <a class="dropdown-item" href="/logout">Выйти</a>
-            <a class="dropdown-item" href="/">На главную</a>
+            <a class="dropdown-item" href="/login">{{message "navbar.login"}}</a>
+            <a class="dropdown-item" href="/registration">{{message "navbar.registration"}}</a>
+            <a class="dropdown-item" href="/logout">{{message "navbar.logout"}}</a>
+            <a class="dropdown-item" href="/">{{message "navbar.tohome"}}</a>
             {{#if isAdmin}}
-            <a class="dropdown-item" href="/users">Cписок пользователей</a>
+                <a class="dropdown-item" href="/users">{{message "navbar.userlist"}}</a>
             {{/if}}
         </div>
     </div>
 
-</ul>
+
+</div>
 
 

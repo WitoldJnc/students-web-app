@@ -34,11 +34,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/**/*.css", "/**/*.jpg").permitAll()
-                    .antMatchers(
-                        "/members","/students", "/marks", "/groups", "/filter", "/filterLastName", "/disciplines", "/registration")
-                        .permitAll()
-                    .anyRequest().authenticated()
+                    .antMatchers("/**/*.css", "/**/*.jpg",
+                            "/locale/messages/messages.properties",
+                            "/locale/messages/messages_en.properties",
+                            "/locale/messages/messages_ru.properties",
+                            "/members","/students", "/marks", "/groups",
+                            "/filter", "/filterLastName", "/disciplines",
+                            "/registration", "/")
+                        .permitAll().anyRequest().authenticated()
 
                 .and()
                     .formLogin()

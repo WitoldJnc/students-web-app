@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <label for="userInput">Username</label>
                         <input required class="form-control" id="userInput" type="text" name="username"
-                               placeholder="username"
+                               placeholder="{{message "placeholder.username"}}"
                                value="{{#username}}{{username}}{{/username}}">
                     </div>
                     <div class="form-group mx-sm-1 mb-1">
@@ -26,23 +26,23 @@
                             {{/edit-role}}
                         </select>
                     </div>
-                    <button class="btn btn-secondary mb-1" type="submit">upd user</button>
+                    <button class="btn btn-secondary mb-1" type="submit">{{message "button.upd"}}</button>
                 </form>
             </div>
         {{/user}}
     </div>
 
-    <div class="table-name" align="center"><h4>Список пользователей</h4></div>
+    <div class="table-name" align="center"><h4>{{message "tname.userList"}}</h4></div>
 
     <div class="table-responsive">
         <table class="table table-hover table-condensed">
             <thead>
             <tr class="active">
                 <th>id</th>
-                <th>Логин</th>
-                <th>Роль</th>
-                <th>delete</th>
-                <th>edit</th>
+                <th>{{message "placeholder.username"}}</th>
+                <th>{{message "placeholder.role"}}</th>
+                <th>{{message "table.delete"}}</th>
+                <th>{{message "table.edit"}}</th>
             </tr>
             </thead>
             <tbody>
@@ -51,8 +51,8 @@
                     <td>{{id}}</td>
                     <td>{{username}}</td>
                     <td>{{roles.userRole}}</td>
-                    <td><a href="/deleteUser/{{id}}">delete</a></td>
-                    <td><a href="/editUser/{{id}}">edit</a></td>
+                    <td><a href="/deleteUser/{{id}}">{{message "table.delete"}}</a></td>
+                    <td><a href="/editUser/{{id}}">{{message "table.edit"}}</a></td>
                 </tr>
             {{/users}}
             </tbody>

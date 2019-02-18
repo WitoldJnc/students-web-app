@@ -1,6 +1,7 @@
 <input name="id" value="{{#id}}{{id}}{{/id}}" hidden>
 <div class="form-group mb-1 ">
-    <input class="form-control" required type="text" name="disciplineName" placeholder="Название дисциплины"
+    <input class="form-control" required type="text" name="disciplineName"
+           placeholder="{{message "table.discipline"}}"
            value="{{#disciplineName}}{{disciplineName}}{{/disciplineName}}" pattern="^[а-яА-ЯёЁa-zA-Z]+$"
         {{> partials/defaultRequiredText}}>
 </div>

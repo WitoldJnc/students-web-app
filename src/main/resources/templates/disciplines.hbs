@@ -16,7 +16,7 @@
                           action="/editDiscipline/{{#id}}{{id}}{{/id}}/patch">
                         {{> partials/addDisciplineForm}}
 
-                        <button class="btn btn-secondary mb-1" type="submit">upd discipline</button>
+                        <button class="btn btn-secondary mb-1" type="submit">{{message "button.upd"}}</button>
                     </form>
                 </div>
             {{/disciplineForEdit}}
@@ -25,23 +25,23 @@
                     <form class="form-inline" role="form" method="post" action="/addDiscipline">
                         {{> partials/addDisciplineForm}}
 
-                        <button class="btn btn-secondary mb-1" type="submit">add discipline</button>
+                        <button class="btn btn-secondary mb-1" type="submit">{{message "button.add"}}</button>
                     </form>
                 </div>
             {{/disciplineForEdit}}
         {{/if}}
     </div>
-    <div class="table-name" align="center"><h4>Список предметов</h4></div>
+    <div class="table-name" align="center"><h4>{{message "tname.disciploneList"}}</h4></div>
 
     <div class="table-responsive">
         <table class="table table-hover table-condensed">
             <thead>
             <tr class="active">
                 <th>id</th>
-                <th>Название предмета</th>
+                <th>{{message "table.discipline"}}</th>
                 {{#if isAdminOrModer}}
-                    <th>delete</th>
-                    <th>edit</th>
+                    <th>{{message "table.delete"}}</th>
+                    <th>{{message "table.edit"}}</th>
                 {{/if}}
             </tr>
             </thead>
@@ -51,8 +51,8 @@
                     <td>{{id}}</td>
                     <td>{{#disciplineName}}{{.}}{{/disciplineName}}</td>
                 {{#if isAdminOrModer}}
-                        <td><a href="/deleteDiscipline/{{id}}">delete</a></td>
-                        <td><a href="/editDiscipline/{{id}}">edit</a></td>
+                        <td><a href="/deleteDiscipline/{{id}}">{{message "table.delete"}}</a></td>
+                        <td><a href="/editDiscipline/{{id}}">{{message "table.edit"}}</a></td>
                     </tr>
                 {{/if}}
             {{/disciplines}}

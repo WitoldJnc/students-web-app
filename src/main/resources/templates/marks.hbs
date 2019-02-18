@@ -15,7 +15,7 @@
                     <form class="form-inline" role="form" method="post" action="/editMark/{{#id}}{{id}}{{/id}}/patch">
 
                         {{> partials/editMarkForm}}
-                        <button class="btn btn-secondary mb-1" type="submit">upd mark</button>
+                        <button class="btn btn-secondary mb-1" type="submit">{{message "button.upd"}}</button>
                     </form>
                 </div>
             {{/mark}}
@@ -23,26 +23,26 @@
                 <div class="container">
                     <form class="form-inline" role="form" method="post" action="/addMarks">
                         {{> partials/addMarkForm}}
-                        <button class="btn btn-secondary mb-1" type="submit">add mark</button>
+                        <button class="btn btn-secondary mb-1" type="submit">{{message "button.add"}}</button>
                     </form>
                 </div>
             {{/mark}}
         {{/if}}
     </div>
 
-    <div class="table-name" align="center"><h4>Табель оценок</h4></div>
+    <div class="table-name" align="center"><h4>{{message "tname.markList"}}</h4></div>
 
     <div class="table-responsive">
         <table class="table table-hover table-condensed ">
             <thead>
             <tr class="active">
-                <th>Номер группы</th>
-                <th>Имя и фамилия</th>
-                <th>Предмет</th>
-                <th>Оценка</th>
+                <th>{{message "table.groupNumber"}}</th>
+                <th>{{message "table.firstAndLastName"}}</th>
+                <th>{{message "table.discipline"}}</th>
+                <th>{{message "table.mark"}}</th>
                 {{#if isAdminOrModer}}
-                    <th>delete</th>
-                    <th>edit</th>
+                    <th>{{message "table.delete"}}</th>
+                    <th>{{message "table.edit"}}</th>
                 {{/if}}
             </tr>
             </thead>
@@ -54,8 +54,8 @@
                     <td>{{#disciplineId.disciplineName}}{{.}}{{/disciplineId.disciplineName}}</td>
                     <td>{{#mark}}{{.}}{{/mark}}</td>
                     {{#if isAdminOrModer}}
-                        <td><a href="/deleteMark/{{id}}">delete</a></td>
-                        <td><a href="/editMark/{{id}}">edit</a></td>
+                        <td><a href="/deleteMark/{{id}}">{{message "table.delete"}}</a></td>
+                        <td><a href="/editMark/{{id}}">{{message "table.edit"}}</a></td>
                     {{/if}}
                 </tr>
             {{/marks}}

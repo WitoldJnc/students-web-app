@@ -14,7 +14,7 @@
                 <div class="container">
                     <form class="form-inline" role="form" method="post" action="/editGroup/{{#id}}{{id}}{{/id}}/patch">
                         {{> partials/addGroupForm}}
-                        <button class="btn btn-secondary mb-1" type="submit">upd group</button>
+                        <button class="btn btn-secondary mb-1" type="submit">{{message "button.upd"}}</button>
                     </form>
                 </div>
             {{/editingGroup}}
@@ -22,22 +22,22 @@
                 <div class="container">
                     <form class="form-inline" role="form" method="post" action="/addGroup">
                         {{> partials/addGroupForm}}
-                        <button class="btn btn-secondary mb-1" type="submit">add group</button>
+                        <button class="btn btn-secondary mb-1" type="submit">{{message "button.add"}}</button>
                     </form>
                 </div>
             {{/editingGroup}}
         {{/if}}
     </div>
-    <div class="table-name" align="center"><h4>Список групп</h4></div>
+    <div class="table-name" align="center"><h4>{{message "tname.groupList"}}</h4></div>
 
     <div class="table-responsive">
         <table class="table table-hover table-condensed">
             <thead>
             <tr class="active">
-                <th>Номер группы</th>
+                <th>{{message "table.groupNumber"}}</th>
                 {{#if isAdminOrModer}}
-                    <th>delete</th>
-                    <th>edit</th>
+                    <th>{{message "table.delete"}}</th>
+                    <th>{{message "table.edit"}}</th>
                 {{/if}}
             </tr>
             </thead>
@@ -46,8 +46,8 @@
                 <tr>
                     <td><a href="/members/{{id}}">{{groupNumber}}</a></td>
                     {{#if isAdminOrModer}}
-                        <td><a href="/deleteGroup/{{id}}">delete</a></td>
-                        <td><a href="/editGroup/{{id}}">edit</a></td>
+                        <td><a href="/deleteGroup/{{id}}">{{message "table.delete"}}</a></td>
+                        <td><a href="/editGroup/{{id}}">{{message "table.edit"}}</a></td>
                     {{/if}}
                 </tr>
             {{/each}}
