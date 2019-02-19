@@ -1,5 +1,6 @@
 package webstudents.controllers;
 
+import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,18 +11,18 @@ import webstudents.models.SchoolGroup;
 import webstudents.models.Student;
 import webstudents.repo.SchoolGroupRepo;
 import webstudents.repo.StudentRepo;
-import webstudents.service.RoleAndUsername;
+
+import static webstudents.service.RoleAndUsername.ONLY_ADMIN_AND_MODER;
+
 
 @Controller
-public class StudentController extends RoleAndUsername {
+public class StudentController {
 
     @Autowired
     private StudentRepo studentRepo;
 
     @Autowired
     private SchoolGroupRepo schoolGroupRepo;
-
-    private static final String ONLY_ADMIN_AND_MODER = "hasAuthority('ADMIN') or hasAuthority('MODER')";
 
     @GetMapping("/students")
     public String index(Model model) {
@@ -34,7 +35,7 @@ public class StudentController extends RoleAndUsername {
     public String add(@RequestParam(value = "firstName") String firstName,
                       @RequestParam(value = "lastName") String lastName,
                       @RequestParam(value = "group") SchoolGroup schoolGroup) {
-        Student student = new Student(firstName, lastName);
+        val student = new Student(firstName, lastName);
         student.setGroup(schoolGroup);
 
         studentRepo.save(student);
@@ -101,9 +102,7 @@ public class StudentController extends RoleAndUsername {
     private void commonModelMapprin(Model model) {
         model.addAttribute("students", studentRepo.findAll());
         model.addAttribute("groups", schoolGroupRepo.findAll());
-        isAdminOrModer(model);
-        isAdmin(model);
-        getUsername(model);
+
     }
 
 }

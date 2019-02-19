@@ -7,15 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import webstudents.models.Discipline;
 import webstudents.repo.DisciplineRepo;
-import webstudents.service.RoleAndUsername;
+
+import static webstudents.service.RoleAndUsername.ONLY_ADMIN_AND_MODER;
+
 
 @Controller
-public class DisciplineController extends RoleAndUsername {
+public class DisciplineController {
 
     @Autowired
     private DisciplineRepo disciplineRepo;
-
-    private static final String ONLY_ADMIN_AND_MODER = "hasAuthority('ADMIN') or hasAuthority('MODER')";
 
     @GetMapping("/disciplines")
     public String showAllDisc(Model model) {
@@ -64,10 +64,6 @@ public class DisciplineController extends RoleAndUsername {
 
     private void commonModelMapping(Model model) {
         model.addAttribute("disciplines", disciplineRepo.findAll());
-        isAdminOrModer(model);
-        isAdmin(model);
-        getUsername(model);
-
     }
 }
 

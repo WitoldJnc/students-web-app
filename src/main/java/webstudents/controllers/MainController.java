@@ -1,38 +1,33 @@
 package webstudents.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import webstudents.service.RoleAndUsername;
+
 
 @Controller
-public class MainController extends RoleAndUsername {
+public class MainController {
 
     @GetMapping("/")
-    public String index(Model model) {
-        isAdmin(model);
-        getUsername(model);
+    public String index() {
+
         return "index";
     }
 
     @GetMapping("/login")
-    public String loginPage(Model model) {
-        isAdmin(model);
-        getUsername(model);
+    public String loginPage() {
+
         return "login";
     }
 
     @GetMapping("/logout")
-    public String logoutPage(Model model) {
-        isAdmin(model);
-        getUsername(model);
+    public String logoutPage() {
+
         return "logout";
     }
 
     @GetMapping("/accessDenied")
-    public String accessDenied(Model model) {
-        isAdmin(model);
-        getUsername(model);
+    public String accessDenied() {
+
         return "accessDenied";
     }
 

@@ -22,5 +22,8 @@ thead {
     width: calc(  - 1em );
 }
 
+.table td, .table th {
+   text-align: center;
+}
 
 

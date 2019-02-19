@@ -13,10 +13,12 @@ import webstudents.repo.DisciplineRepo;
 import webstudents.repo.MarkRepo;
 import webstudents.repo.SchoolGroupRepo;
 import webstudents.repo.StudentRepo;
-import webstudents.service.RoleAndUsername;
+
+import static webstudents.service.RoleAndUsername.ONLY_ADMIN_AND_MODER;
+
 
 @Controller
-public class MarkController extends RoleAndUsername {
+public class MarkController {
 
     @Autowired
     private MarkRepo markRepo;
@@ -29,8 +31,6 @@ public class MarkController extends RoleAndUsername {
 
     @Autowired
     private SchoolGroupRepo schoolGroupRepo;
-
-    private static final String ONLY_ADMIN_AND_MODER = "hasAuthority('ADMIN') or hasAuthority('MODER')";
 
     @GetMapping("/marks")
     public String findAllMarks(Model model) {
@@ -94,8 +94,5 @@ public class MarkController extends RoleAndUsername {
         model.addAttribute("groups", schoolGroupRepo.findAll());
         model.addAttribute("disciplines", disciplineRepo.findAll());
 
-        isAdminOrModer(model);
-        isAdmin(model);
-        getUsername(model);
     }
 }

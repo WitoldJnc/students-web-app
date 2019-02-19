@@ -1,5 +1,6 @@
 package webstudents.controllers;
 
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,12 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import webstudents.models.User;
 import webstudents.repo.RoleRepo;
 import webstudents.repo.UserRepo;
-import webstudents.service.RoleAndUsername;
 
 import java.util.Optional;
 
 @Controller
-public class UserController extends RoleAndUsername {
+public class UserController {
 
     @Autowired
     private UserRepo userRepo;
@@ -37,7 +37,7 @@ public class UserController extends RoleAndUsername {
                           @RequestParam(value = "password") String password,
                           User user, Model model) {
         commonModelMapping(model);
-        Optional<User> userFromDb = Optional.ofNullable(userRepo.findByUsername(user.getUsername()));
+        val userFromDb = Optional.ofNullable(userRepo.findByUsername(user.getUsername()));
 
         if (userFromDb.isPresent()) {
             return "registration";
@@ -53,10 +53,6 @@ public class UserController extends RoleAndUsername {
     }
 
     private void commonModelMapping(Model model) {
-
-        isAdminOrModer(model);
-        isAdmin(model);
-        getUsername(model);
 
     }
 }

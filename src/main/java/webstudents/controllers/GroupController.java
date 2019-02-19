@@ -12,14 +12,15 @@ import webstudents.models.SchoolGroup;
 import webstudents.repo.DisciplineRepo;
 import webstudents.repo.SchoolGroupRepo;
 import webstudents.repo.StudentRepo;
-import webstudents.service.RoleAndUsername;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
+import static webstudents.service.RoleAndUsername.ONLY_ADMIN_AND_MODER;
+
 @Controller
-public class GroupController extends RoleAndUsername {
+public class GroupController {
 
     @Autowired
     private SchoolGroupRepo schoolGroupRepo;
@@ -29,8 +30,6 @@ public class GroupController extends RoleAndUsername {
 
     @Autowired
     private DisciplineRepo disciplineRepo;
-
-    private static final String ONLY_ADMIN_AND_MODER = "hasAuthority('ADMIN') or hasAuthority('MODER')";
 
     @GetMapping("/groups")
     public String showAll(Model model) {
@@ -53,7 +52,7 @@ public class GroupController extends RoleAndUsername {
     public String addGroup(@RequestParam Integer groupNumber, Model model,
                            @RequestParam(value = "disciplines", required = false) Discipline... discipline) {
 
-        SchoolGroup schoolGroup = new SchoolGroup();
+        val schoolGroup = new SchoolGroup();
         val disciplines = new HashSet<>(Arrays.asList(discipline));
 
         schoolGroup.setDisciplines(disciplines);
@@ -105,9 +104,7 @@ public class GroupController extends RoleAndUsername {
         model.addAttribute("groups", schoolGroupRepo.findAll());
         model.addAttribute("allDisciplines", disciplineRepo.findAll());
         model.addAttribute("disciplines", disciplineRepo.findAll());
-        isAdminOrModer(model);
-        isAdmin(model);
-        getUsername(model);
+
     }
 }
 

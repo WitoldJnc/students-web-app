@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-{{> navbar}}
+{{> header}}
 
 <div id="inner" class="container">
 
@@ -29,7 +29,7 @@
         {{/if}}
         <div class="container">
             <form class="form-inline" role="form" method="post" action="filter">
-                <div class="form-group mb-1 ">
+                <div class="form-group">
                     <input class="form-control" type="text" name="filter"
                            placeholder="{{message "placeholder.findByFname"}}">
                 </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="container">
             <form class="form-inline" role="form" method="post" action="filterLastName">
-                <div class="form-group mb-1 ">
+                <div class="form-group">
                     <input class="form-control" type="text" name="filterLastName"
                            placeholder="{{message "placeholder.findByLname"}}">
                 </div>
@@ -80,7 +80,9 @@
             </tbody>
         </table>
     </div>
+
 </div>
+{{> footer}}
 
 </body>
 </html>

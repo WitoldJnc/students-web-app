@@ -1,11 +1,12 @@
 package webstudents.service;
 
+import lombok.val;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 
 public class RoleAndUsername {
 
-    protected void isAdmin(Model model) {
+    public static void isAdmin(Model model) {
         boolean admin = SecurityContextHolder
                 .getContext()
                 .getAuthentication()
@@ -15,24 +16,26 @@ public class RoleAndUsername {
         model.addAttribute("isAdmin", admin);
     }
 
-    protected void getUsername(Model model) {
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    public static void getUsername(Model model) {
+        val name = SecurityContextHolder.getContext().getAuthentication().getName();
 
         model.addAttribute("user-login", name.equals("anonymousUser") ? "anonymous" : name);
 
     }
 
-    protected void isAdminOrModer(Model model) {
+    public static void isAdminOrModer(Model model) {
         boolean adminOrModer = SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getAuthorities()
                 .stream()
                 .allMatch(grantedAuthority ->
-                        (grantedAuthority.getAuthority().equals("ADMIN")
-                                ||
-                                (grantedAuthority.getAuthority().equals("MODER"))));
+                        grantedAuthority.getAuthority().equals("ADMIN") ||
+                                grantedAuthority.getAuthority().equals("MODER"));
 
         model.addAttribute("isAdminOrModer", adminOrModer);
     }
+
+    public static final String ONLY_ADMIN_AND_MODER = "hasAuthority('ADMIN') or hasAuthority('MODER')";
+
 }

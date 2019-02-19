@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-{{> navbar}}
+{{> header}}
 
 <div id="inner" class="container">
     <div class="container">
@@ -11,7 +11,7 @@
             {{> partials/addUserForm}}
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="remember"
-                       name="remember-me" >
+                       name="remember-me">
                 <label class="form-check-label" for="remember">{{message "system.rememberMe"}}</label>
             </div>
 
@@ -21,6 +21,6 @@
     </div>
 
 </div>
-
+{{> footer}}
 </body>
 </html>
