@@ -20,6 +20,7 @@
     создать ДБ - Students (sql: create database students)  
     username: root  
     password: root  
+    опционально:в комманд лайн клиенте MySQL засетать глобал тайм зону на свой часовой пояс: (sql: SET GLOBAL time_zone = '+02:00';)
 * Запустить файл application.java  
 * В плагине миграции дб Liquibase запустить таски:  
      dropAll  
