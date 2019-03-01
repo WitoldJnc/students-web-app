@@ -15,4 +15,15 @@
 * Handlebars  
 * Gradle  
 
+  ### Как запустить:  
+* Субд - MySQL  
+    создать ДБ - Students (sql: create database students)  
+    username: root  
+    password: root  
+* Запустить файл application.java  
+* В плагине миграции дб Liquibase запустить таски:  
+     dropAll  
+     update  
+* Перейти по адрессу порта ( localhost:8080 )
+     
   
